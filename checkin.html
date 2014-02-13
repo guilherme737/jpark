@@ -1,0 +1,95 @@
+  
+  <style type="text/css">
+    
+  </style>
+  <div class="header">
+    <a href="#home" ><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
+    <h1> Check-in </h1>
+  </div>
+  <div class="content checkin" align="center" style="color:#ffffff">
+    <img src="imagens/logo.png" height="47" width="204"/>  
+      <br/><br/>      
+      <div style="background-color:#111; padding-top:10px">
+        <div>INSTRU&Ccedil;&Otilde;ES</div>  
+        <table>      
+          <tr>
+            <td>1</td>
+            <td style="font-size:0.8em">Confira o saldo do cartão</td>
+            <td>2</td>
+            <td style="font-size:0.8em">Digite o nº da sua vaga</td>
+            <td>3</td>
+            <td style="font-size:0.8em">Autentique sua vaga</td>
+          </tr>
+        </table> 
+      </div>
+      <br/>
+      <div style="background-color:#111; padding-top:10px">
+        <div>Saldo atual</div>  
+        <table>      
+          <tr>
+            <td><input type="text" id="saldo" name="saldo" readonly="true" value="02h37"></td>
+            <td><input id="comprar-credito" type="button" value="Comprar crédito" class="button"/></td>          
+          </tr>
+        </table>       
+      </div>
+      <br/>
+      <div style="background-color:#111; padding-top:10px">
+        <div>Digite abaixo o nº da vaga e autentique o pagamento</div>  
+        <table>      
+          <tr>
+            <td rowspan="3" style="width:50%"><input type="text" id="vaga" name="vaga" class="campo-vaga" style="font-size:2.1em !important" maxlength="7" autofocus></td>
+          </tr> 
+          <tr>
+            <td><input id="pagar-saldo" type="button" value="Pagar com &#13;&#10; seu saldo" class="button pagar-saldo"/></td>
+          </tr>
+          <tr>
+            <td><input id="pagar-cartao" type="button" value="Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito" class="button pagar-cartao"/></td>          
+          </tr>
+        </table>       
+      </div>
+      <br/><br/>
+  </div>
+      <script type="text/javascript">
+
+        $(document).ready(function(){
+
+
+          $('#pagar-saldo').click(function() {
+            var default_url = "http://desenvolvimento.xavante.net.br:82";
+
+            
+            $.ajax({
+              type: "POST",
+              //contentType: "application/json; charset=utf-8", 
+              dataType: "json", 
+              url: default_url+'/validations.json',              
+              data: {validation: {id_parking_space: $('#vaga').val()}},
+              success: function(data) {
+                console.log(data);
+                alert(data.message);                
+              }, 
+              failure: function () {
+                alert("Falha ao efetuar o checkin para essa vaga.");  
+              }
+            });
+          
+            /*  
+            $.post(default_url+'/validations.json', 
+                {validation: {id_parking_space: $('#vaga').val()}},
+                function(data) {
+                  console.log(data);
+                  alert(data.message);
+                });
+            */
+          });    
+
+          $('#pagar-cartao').click(function() {
+            alert("Funcionalidade ainda não disponível");
+          }); 
+          
+          $('#comprar-credito').click(function() {
+            alert("Funcionalidade ainda não disponível");
+          });
+
+        })
+      </script>

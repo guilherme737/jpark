@@ -1,0 +1,235 @@
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, maximum-scale=0.5" />
+    
+        <!--<link rel="stylesheet" type="text/css" href="js/jquery.mobile/jquery.mobile.structure-1.4.0.min.css"> -->
+        <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.structure.min.css">
+        <link rel="stylesheet" type="text/css" href="css/GeneralStyle.css">
+        <link rel="stylesheet" href="css/fonts.css">
+
+
+        <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+        <script type="text/javascript" src="js/jquery.cookie.js"></script>     
+        <script type="text/javascript" src="js/jquery.maskedinput.min.js"></script>
+
+        <!--<script type="text/javascript" src="js/jquery.mobile/jquery.mobile-1.4.0.min.js"></script>-->
+        <script type="text/javascript" src="js/jquery.mobile.custom/jquery.mobile.custom.min.js"></script>
+      </head>
+
+      <body>     
+
+      <div id="credencial" data-role="page">
+        <div class="header" style="display: none;">
+            <h1> Estacionamento </h1>
+        </div>
+          <div class="content" align="center">
+            <form action="" method="post" >
+            <img src="imagens/logo.png" height="47" width="204"/>
+            <table>
+              <tr>
+                <td align="center" colspan="2">
+                  <span id="firstline"> PARA ENTRAR E SAIR DO ESTACIONAMENTO</span>
+                </td>
+              </tr>
+             
+              <tr>
+                <td align="center" colspan="2">
+                  <span id="secondline"> Possui cadastro? Insira seus dados. </span>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="text" id="login" placeholder="Login" maxlength="20" autocomplete="on"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2">
+                  <input type="password" id="password" placeholder="Senha" maxlength="20" autocomplete="off"/>
+                </td>
+              </tr>
+              <tr>
+                <td style="width: 48%;" class="checker">
+                  <input type="checkbox" id="c1" name="cc" />
+                  <label for="c1"><span></span>Lembrar Senha</label>
+                </td>
+                <td>
+                  <!--<a href="#" id="login" class="button" style="display:block" onclick="logar();">Acessar</a> -->
+                  <input type="submit" value="Acessar" class="button" onclick="logar();"/>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="2" align="center">
+                  <span style="font-size:0.78rem;color:#FFF">Esqueceu sua senha 
+                    <a href="#"><strong>Clique aqui!</strong></a>
+                  </span>
+                </td>
+              </tr>
+           </table>
+         </form>
+         </div>
+         <!-- div de separação do conteudo -->
+         <div class="separator"></div>
+           <div class="footer" align="center">
+            <span>Não cadastrado? <a href="#register" ><strong>Clique aqui para se cadastrar.</strong></a>
+            <span><a href="#historico" onclick="buscarHistorico();"><strong>Buscar Historico</strong></a>  
+           </div>
+           <div class="footer" align="center" id="outer-line" style="padding-bottom:20px;display:none">
+            <span>Esqueceu sua senha? <a href="#remember_password" ><strong>Clique aqui!</strong></a>
+           </div>
+           <!-- div de separação do conteudo -->
+          <div class="separator" style="margin-top:5%;"></div>
+          </div>       
+          
+          <div class="modal" align="center">
+            <div class="title">
+              <span id="line"></span>
+              <div class="loader">
+                <span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- TELA - HISTORICO -->
+      <div id="historico" data-role="page">
+        <div class="header">
+          <a href="#back" ><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
+          <h1> Histórico </h1>
+        </div>
+        <div class="content" align="center">
+          <div id="background-div" id='wrapper'>
+            <table id="history-table">
+                  <tr id="table-header">
+                    <th>Vaga</th>
+                    <th>Data</th>
+                    <th>↑/↓</th>
+                    <!--<th>Autorizado</th> -->
+                    <th>Valor</th>
+                  </tr>
+                  <tbody id="history_list">
+                      
+                  </tbody>
+                    
+                  
+                </table>
+            </div>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+
+        $(document).ready(function(){
+          
+          if ('ajaxPrefilter' in $) 
+            $.ajaxPrefilter(function(options, originalOptions, xhr) { 
+              options.xhrFields = {
+                    withCredentials: true
+                  };
+              
+              CSRFProtection(xhr); 
+            });
+          else 
+            $(document).ajaxSend(function(e, xhr) { CSRFProtection(xhr); });
+
+        });
+
+        function CSRFProtection(xhr) {
+
+          var token = $('meta[name="csrf-token"]').attr('content');
+          if (token) 
+            xhr.setRequestHeader('X-CSRF-Token', token);
+
+        }
+
+        function logar() {
+          var invalid_password = false;
+          var default_url = "http://desenvolvimento.xavante.net.br";
+
+          //event.preventDefault();
+          $.ajax({
+                beforeSend: function(){
+                  //$('#modal').show()
+                },
+                complete: function(data){
+                  //$('#modal').hide()
+                  $.get(default_url+'/auth').success(function(auth){
+                    if (auth != true) {
+                      if (invalid_password) {
+                        alert("usuario ou senha incorretos");
+                        window.location.href = "#sign_in"
+                        invalid_password = !invalid_password;
+                      };
+                    }
+                    else{
+                      alert("Logado com sucesso");
+                      //window.location.href = "index.html";                  
+                    };
+                  })
+                  
+                },
+                type: "POST",
+                url: default_url+'/users/sign_in',
+             
+                data: {
+                  "user[login]":$('#login').val(),
+                  "user[password]":$('#password').val(),
+                  "user[remember_me]":0,
+                  "xhrFields[withCredentials]":true
+                },  
+            
+                //dataType: "json"
+                
+
+            });
+            return false;
+          } 
+
+          function buscarHistorico() {
+            var default_url = "http://desenvolvimento.xavante.net.br";
+            
+            $.ajax({
+              type: "GET",
+              url: default_url+'/validations.json',
+              contentType: "application/json; charset=utf-8", 
+                dataType: "json", 
+                crossDomain: true,
+              success: function(data) {
+                console.log("Sucesso ---> " );
+                for($i=0; $i < data.length; $i++){
+                  console.log("Vaga" + data[$i].vacancy);
+                  console.log("Método" + data[$i].method);
+                  $('#history-table tr:last').after(
+                    '<tr>'+
+                        '<td align="center">'+ data[$i].vacancy       +'</td>' +
+                        '<td align="center"> '+ data[$i].entry_time   +'</td>' +
+                        '<td align="center"> '+ data[$i].exit_time    +'</td>' +                   
+                        '<td >'+ data[$i].utilized_credit             +'</td>' +
+                    '</tr>'
+                  );
+                }
+              },
+              failure: function () {
+                console.log("Falhou");
+              }
+            })
+            
+          }
+
+      </script>
+
+      </body>
+    </html>
+
+    <div id="modal" >
+      <h2>Carregando...</h2>
+    </div>
+
+
+
+
+

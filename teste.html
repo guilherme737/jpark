@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teste Login</title>
+	<script data-main="scripts/main" src="scripts/vendor/jquery/jquery.min.js"></script>
+	<script data-main="scripts/main" src="scripts/vendor/jquery.cookie/jquery.cookie.js"></script>
+
+
+</head>
+<body>
+	<form action="http://demo.xavante.net.br/auth" id="form">
+		<label>Login</label>
+		<input type="text" name="[user]login" id="login">
+
+		<label>Senha</label>
+		<input type="password" name="[user]password" id="password">
+
+		<input type="button" value="Enviar" onclick="logar();">	
+
+		<br/>
+
+		<input type="button" value="Historico" onclick="buscarHistorico();">	
+	</form>
+	
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+
+
+		    //$.cookie("remember_user_token", "Guilherme");
+		    //$.cookie('remember_user_token', 'the_value', { expires: 7, path: '/' });    
+			//alert($.cookie("remember_user_token"));	
+			/*
+			$.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
+		        options.xhrFields = {
+		          withCredentials: true
+		        };
+		        // If we have a csrf token send it through with the next request
+		        //if(typeof this.get('_csrf') !== 'undefined') {
+		          //jqXHR.setRequestHeader('X-CSRF-Token', this.get('_csrf'));
+		        //}
+		      });
+			*/
+			
+			if ('ajaxPrefilter' in $) 
+				$.ajaxPrefilter(function(options, originalOptions, xhr) { 
+					options.xhrFields = {
+			          withCredentials: true
+			        };
+					
+					CSRFProtection(xhr); 
+				});
+			else 
+				$(document).ajaxSend(function(e, xhr) { CSRFProtection(xhr); });
+
+		});
+
+		function CSRFProtection(xhr) {
+
+		 	var token = $('meta[name="csrf-token"]').attr('content');
+		 	if (token) 
+		 		xhr.setRequestHeader('X-CSRF-Token', token);
+
+		 	alert('CSRFProtection - TOKEN - ' + token);
+		 	/*---------------*/
+			var csrfToken = $('meta[name=csrf-token]').attr('content');
+		    var csrfParam = $('meta[name=csrf-param]').attr('content');
+		    //$('form input[name="' + csrfParam + '"]').val(csrfToken);
+		    console.log(csrfToken);
+		    console.log(csrfParam);
+
+			/*---------------*/
+		}
+
+		function buscarHistorico() {
+			var default_url = "http://desenvolvimento.xavante.net.br";
+			$.ajax({
+				type: "GET",
+				url: default_url+'/validations',
+				success: function(data) {
+					console.log("Sucesso ---> " + data);
+				}
+			})
+		}
+	
+		function logar() {
+			var invalid_password = false;
+			var default_url = "http://desenvolvimento.xavante.net.br";
+
+			event.preventDefault();
+			$.ajax({
+	          beforeSend: function(){
+	            //$('#modal').show()
+	          },
+	          complete: function(data){
+	            //$('#modal').hide()
+	            $.get(default_url+'/auth').success(function(auth){
+	              if (auth != true) {
+	                if (invalid_password) {
+	                  alert("usuario ou senha incorretos");
+	                  window.location.href = "#sign_in"
+	                  invalid_password = !invalid_password;
+	                };
+	              }
+	              else{
+	                //window.location.href = "#back"
+	                alert('Logado com sucesso.');
+	              };
+	            })
+	            
+	          },
+	          type: "POST",
+	          //contentType: "application/json;charset=utf-8",
+	          //contentType:"application/x-www-form-urlencoded",
+	          url: default_url+'/users/sign_in',
+	        /*	  
+	          data: JSON.stringify({user:{ 
+	            login: $('#login').val(), 
+	            password: $('#password').val(),
+	            },
+	          xhrFields:{'withCredentials': true}
+
+	          }),		
+			*/
+			  data: {
+			  	"user[login]":$('#login').val(),
+			  	"user[password]":$('#password').val(),
+			  	"user[remember_me]":0,
+			  	"xhrFields[withCredentials]":true
+			  },	
+			  
+	          dataType: "json"
+	          
+
+	      });
+	    } 
+		
+	</script>
+</body>
+</html>
