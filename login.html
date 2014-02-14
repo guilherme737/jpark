@@ -33,7 +33,7 @@
               </td>
               <td>
                 <!--<a href="#" id="login" class="button" style="display:block" onclick="logar();">Acessar</a>-->
-                <input type="button" value="Acessar" class="button" onclick="logar();"/>
+                <input id="btn-acessar" type="button" value="Acessar" class="button" />
               </td>
             </tr>
             <tr>
@@ -70,6 +70,8 @@
     
 
     <script type="text/javascript">
+
+      $(document).on("vclick", '#btn-acessar', logar)
 
       function logar() {
         var invalid_password = false;
