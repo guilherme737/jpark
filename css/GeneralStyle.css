@@ -647,3 +647,7 @@ div.checkin input[type="button"].pagar-saldo, input[type="button"].pagar-cartao 
 .campo-vaga {  
   height: 60px;
 }
+
+input {
+    -webkit-user-select: auto !important;
+}
