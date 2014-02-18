@@ -80,10 +80,9 @@
         //event.preventDefault();
         $.ajax({
               beforeSend: function(){
-                //$('#modal').show()
+                $('#modal').show()
               },
-              complete: function(data){
-                //$('#modal').hide()
+              complete: function(data){                
                 $.get(default_url+'/auth').success(function(auth){
                   if (auth != true) {
                     if (invalid_password) {
@@ -93,6 +92,7 @@
                     };
                   }
                   else{
+                    $('#modal').hide();
                     console.log("Logado com sucesso");    
                     $('#home').load('home.html', function() {
                       $.mobile.navigate("#home");  

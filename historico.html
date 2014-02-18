@@ -26,6 +26,9 @@
         var default_url = "http://desenvolvimento.xavante.net.br:82";
         
         $.ajax({
+          beforeSend: function () {
+            $('#modal').show();
+          },
           type: "GET",
           url: default_url+'/validations.json',
           contentType: "application/json; charset=utf-8", 
@@ -33,6 +36,7 @@
             crossDomain: true,
           success: function(data) {
             console.log("Sucesso ---> " );
+            $('#modal').hide();
             for($i=0; $i < data.length; $i++){
               //console.log("Vaga" + data[$i].vacancy);
               //console.log("Método" + data[$i].method);
@@ -52,3 +56,6 @@
         });
       })
     </script>
+  <div id="modal" >
+    <h2>Carregando...</h2>
+  </div>
