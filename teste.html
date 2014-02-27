@@ -21,6 +21,7 @@
 		<br/>
 
 		<input type="button" value="Historico" onclick="buscarHistorico();">	
+		<input type="button" value="Alterar Usuario" onclick="editarUsuario();">	
 	</form>
 	
 
@@ -75,7 +76,7 @@
 		}
 
 		function buscarHistorico() {
-			var default_url = "http://demo.xavante.net.br";
+			var default_url = "http://desenvolvimento.xavante.net.br:82";
 			$.ajax({
 				type: "GET",
 				url: default_url+'/validations',
@@ -87,7 +88,7 @@
 	
 		function logar() {
 			var invalid_password = false;
-			var default_url = "http://demo.xavante.net.br";
+			var default_url = "http://desenvolvimento.xavante.net.br:82";
 
 			event.preventDefault();
 			$.ajax({
@@ -136,7 +137,55 @@
 
 	      });
 	    } 
+
+	  
 		
+		function editarUsuario(){
+			event.preventDefault();
+				
+			var invalid_password = false;
+			var default_url = "http://desenvolvimento.xavante.net.br:82";
+			//Li2Json();
+			$.ajax({				
+				url: default_url+"/users",				
+				data: {
+					user:{
+						login: 'guilherme',
+						email: 'charles@mudado.com.br',
+						password: '',
+						password_confirmation: '',
+						current_password:'123456',
+						user_info_attributes: {
+							name:'97712329168',
+							surname:'Mendes mudado',
+							address:'Rua 115 alterado',
+							cep:'74470230',
+							rg:'',
+							organ_dispatcher:'',
+							cpf:'',
+							id:'20'
+						},
+						card_attributes:{
+							number:'',
+							cvv:'',
+							expiration_date:'',
+							name:'alterado',
+							id:'35'
+						}
+					}
+				},
+				dataType: "json",
+				type: 'PUT',
+				context: jQuery('#resultado'),
+				success: function(data){
+					if(data) {	
+						alert('Cadastro realizado com sucesso');						
+					} else
+						alert('ERRO: Não foi possivel efetuar o cadastro');
+				}
+			});
+							
+		}
 	</script>
 </body>
 </html>

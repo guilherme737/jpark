@@ -53,25 +53,29 @@
 
         $(document).ready(function(){
 
-
           $('#pagar-saldo').click(function() {
             var default_url = "http://desenvolvimento.xavante.net.br:82";
 
+            if ( $('#vaga').val() > 0 ) {
+              $.ajax({
+                type: "POST",
+                //contentType: "application/json; charset=utf-8", 
+                dataType: "json", 
+                url: default_url+'/validations.json',              
+                data: {validation: {id_parking_space: $('#vaga').val()}},
+                success: function(data) {
+                  console.log(data);
+                  alert(data.message);                
+                }, 
+                failure: function () {
+                  alert("Falha ao efetuar o checkin para essa vaga.");  
+                }
+              });
+            } else {
+              alert('Informe a vaga que deseja estacionar.');
+            }
             
-            $.ajax({
-              type: "POST",
-              //contentType: "application/json; charset=utf-8", 
-              dataType: "json", 
-              url: default_url+'/validations.json',              
-              data: {validation: {id_parking_space: $('#vaga').val()}},
-              success: function(data) {
-                console.log(data);
-                alert(data.message);                
-              }, 
-              failure: function () {
-                alert("Falha ao efetuar o checkin para essa vaga.");  
-              }
-            });
+            
           
             /*  
             $.post(default_url+'/validations.json', 

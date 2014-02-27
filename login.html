@@ -1,129 +1,128 @@
-      <div class="header" style="display: none;">
-          <h1> Estacionamento </h1>
-      </div>
-        <div class="content" align="center">
-          <form action="" method="post" >
-          <img src="imagens/logo.png" height="47" width="204"/>
-          <table>
+<div class="header" style="display: none;">
+    <h1> Estacionamento </h1>
+</div>
+<div class="content" align="center">
+    <form action="" method="post" >
+        <img src="imagens/logo.png" height="47" width="204"/>
+        <table>
             <tr>
-              <td align="center" colspan="2">
-                <span id="firstline"> PARA ENTRAR E SAIR DO ESTACIONAMENTO</span>
-              </td>
+                <td align="center" colspan="2">
+                    <span id="firstline"> PARA ENTRAR E SAIR DO ESTACIONAMENTO</span>
+                </td>
             </tr>
-           
-            <tr>
-              <td align="center" colspan="2">
-                <span id="secondline"> Possui cadastro? Insira seus dados. </span>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="text" id="login" name="login" placeholder="Login" maxlength="20" autocomplete="off"/>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2">
-                <input type="password" id="password" name="password" placeholder="Senha" maxlength="20" autocomplete="off"/>
-              </td>
-            </tr>
-            <tr>
-              <td style="width: 48%;" class="checker">
-                <input type="checkbox" id="c1" name="cc" />
-                <label for="c1"><span></span>Lembrar Senha</label>
-              </td>
-              <td>
-                <!--<a href="#" id="login" class="button" style="display:block" onclick="logar();">Acessar</a>-->
-                <input id="btn-acessar" type="button" value="Acessar" class="button" />
-              </td>
-            </tr>
-            <tr>
-              <td colspan="2" align="center">
-                <span style="font-size:0.78rem;color:#FFF">Esqueceu sua senha 
-                  <a href="#"><strong>Clique aqui!</strong></a>
-                </span>
-              </td>
-            </tr>
-         </table>
-       </form>
-       </div>
-       <!-- div de separação do conteudo -->
-       <div class="separator"></div>
-         <div class="footer" align="center">
-          <span>Não cadastrado? <a href="#register" ><strong>Clique aqui para se cadastrar.</strong></a>
-         </div>
-         <div class="footer" align="center" id="outer-line" style="padding-bottom:20px;display:none">
-          <span>Esqueceu sua senha? <a href="#remember_password" ><strong>Clique aqui!</strong></a>
-         </div>
-        </div>
-        <!-- div de separação do conteudo -->
-        <div class="separator" style="margin-top:5%;"></div>
-        
-        <div class="modal" align="center">
-          <div class="title">
-            <span id="line"></span>
-            <div class="loader">
-              <span></span>
-            </div>
-          </div>
-        </div>
-      </div>
-    
 
-    <script type="text/javascript">
+            <tr>
+                <td align="center" colspan="2">
+                    <span id="secondline"> Possui cadastro? Insira seus dados. </span>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="text" id="login" name="login" placeholder="Login" maxlength="20" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="password" id="password" name="password" placeholder="Senha" maxlength="20" autocomplete="off"/>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 48%;" class="checker">
+                    <input type="checkbox" id="c1" name="cc" />
+                    <label for="c1"><span></span>Lembrar Senha</label>
+                </td>
+                <td>
+                    <!--<a href="#" id="login" class="button" style="display:block" onclick="logar();">Acessar</a>-->
+                    <input id="btn-acessar" type="button" value="Acessar" class="button" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <span style="font-size:0.78rem;color:#FFF">Esqueceu sua senha 
+                        <a href="#"><strong>Clique aqui!</strong></a>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<!-- div de separação do conteudo -->
+<div class="separator"></div>
+<div class="footer" align="center">
+    <span>Não cadastrado? <a href="" id="menu-cadastro-novo"><strong>Clique aqui para se cadastrar.</strong></a>
+</div>
+<div class="footer" align="center" id="outer-line" style="padding-bottom:20px;display:none">
+    <span>Esqueceu sua senha? <a href="#remember_password" ><strong>Clique aqui!</strong></a>
+</div>
 
-      $(document).on("vclick", '#btn-acessar', logar)
+<!-- div de separação do conteudo -->
+<div class="separator" style="margin-top:5%;"></div>
 
-      function logar() {
+
+
+
+
+<script type="text/javascript">
+
+    $(document).on("vclick", "#menu-cadastro-novo", function() {
+        $('#cadastro-novo').load('cadastro-novo.html', function() {
+            $.mobile.navigate("#cadastro-novo");
+        });
+    });
+
+    $(document).on("vclick", '#btn-acessar', logar);
+
+    function logar() {
         var invalid_password = false;
         var default_url = "http://desenvolvimento.xavante.net.br:82";
 
         //event.preventDefault();
         $.ajax({
-              beforeSend: function(){
-                $('#modal').show()
-              },
-              complete: function(data){                
-                $.get(default_url+'/auth').success(function(auth){
-                  if (auth != true) {
-                    if (invalid_password) {
-                      alert("usuario ou senha incorretos");
-                      window.location.href = "#sign_in"
-                      invalid_password = !invalid_password;
-                    };
-                  }
-                  else{
-                    $('#modal').hide();
-                    console.log("Logado com sucesso");    
-                    $('#home').load('home.html', function() {
-                      $.mobile.navigate("#home");  
-                    });                        
-                    
-                    //window.location.href = "index.html";                  
-                  };
+            beforeSend: function() {
+                $('#modal').show();
+            },
+            complete: function(data) {
+                $.get(default_url + '/auth').success(function(auth) {
+                    if (auth != true) {
+                        if (invalid_password) {
+                            alert("usuario ou senha incorretos");
+                            window.location.href = "#sign_in"
+                            invalid_password = !invalid_password;
+                        }
+                        ;
+                    }
+                    else {
+                        $('#modal').hide();
+                        console.log("Logado com sucesso");
+                        $('#home').load('home.html', function() {
+                            $.mobile.navigate("#home");
+                        });
+
+                        //window.location.href = "index.html";                  
+                    }
+                    ;
                 })
-                
-              },
-              type: "POST",
-              url: default_url+'/users/sign_in',
-           
-              data: {
-                "user[login]":$('#login').val(),
-                "user[password]":$('#password').val(),
-                "user[remember_me]":0,
-                "xhrFields[withCredentials]":true
-              },  
-          
-              dataType: "json"
-              
 
-          });
-          return false;
-        } 
-    </script>
+            },
+            type: "POST",
+            url: default_url + '/users/sign_in',
+            data: {
+                "user[login]": $('#login').val(),
+                "user[password]": $('#password').val(),
+                "user[remember_me]": 0,
+                "xhrFields[withCredentials]": true
+          },
+            dataType: "json"
 
-  <div id="modal" >
+
+        });
+        return false;
+    }
+</script>
+
+<div id="modal" >
     <h2>Carregando...</h2>
-  </div>
+</div>
 
 
 

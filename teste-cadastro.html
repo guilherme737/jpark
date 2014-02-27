@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Teste Login</title>
+	<script data-main="scripts/main" src="js/jquery-2.0.3.min.js"></script>
+	<script data-main="scripts/main" src="js/jquery.cookie.js"></script>
+
+
+</head>
+<body>
+	<form action="http://demo.xavante.net.br/auth" id="form">
+		<label>Login</label>
+		<input type="text" name="[user]login" id="login">
+
+		<label>Senha</label>
+		<input type="password" name="[user]password" id="password">
+
+		<input type="button" value="Enviar" onclick="logar();">	
+
+		<br/>
+
+		
+		<input type="button" value="Cadastrar Usuario" onclick="cadastrar();">	
+	</form>
+	
+
+	<script type="text/javascript">
+
+		$(document).ready(function(){
+			
+		});
+
+		
+
+		function cadastrar() {
+			$.ajax({
+			  dataType: "json",
+			  url: 'http://desenvolvimento.xavante.net.br:82/usuarios.json',
+			  method: 'POST',
+			  data: {client: {
+				name: 'guiga3', telefone: '6222377562',
+				user_attributes: {
+				 	email: 'guiga3@batman.ii', password: '123456', password_confirmation: '123456', login: 'guiga3'
+				 	}, 
+				phones_attributes: [{phone: '621197713'}, {phone: '622243224'}],
+				card_attributes: {cvv: 232, expiration_date: '2015-12-20', name: 'guiga3', number: '99999999999999'}
+			}},
+			  success: function(data){console.log(data)}
+			});
+		}
+	</script>
+</body>
+</html>

@@ -29,7 +29,7 @@
       </tr>
       <tr>
         <td>
-          <a href="#edit" class="link-buttons">
+          <a href="" id="menu-cadastro-editar" class="link-buttons">
             <img src="imagens/24/user24.png"/>Dados Cadastro
           </a>
         </td>
@@ -54,6 +54,12 @@
     $('#menu-checkin').click(function() {      
       $('#checkin').load('checkin.html', function() {
         $.mobile.navigate("#checkin");
+      });
+    });
+
+    $('#menu-cadastro-editar').click(function() {      
+      $('#cadastro-editar').load('cadastro-editar.html', function() {
+        $.mobile.navigate("#cadastro-editar");
       });
     });
 
