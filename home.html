@@ -34,6 +34,13 @@
           </a>
         </td>
       </tr>
+      <tr>
+        <td>
+          <a href="" id="menu-cc" class="link-buttons">
+            <img src="imagens/24/user24.png"/>Comprar Crédito
+          </a>
+        </td>
+      </tr>
    </table>
   </div>
   <div class="modal" align="center">
@@ -60,6 +67,12 @@
     $('#menu-cadastro-editar').click(function() {      
       $('#cadastro-editar').load('cadastro-editar.html', function() {
         $.mobile.navigate("#cadastro-editar");
+      });
+    });
+
+    $('#menu-cc').click(function() {      
+      $('#comprar-credito').load('comprar-credito.html', function() {
+        $.mobile.navigate("#comprar-credito");
       });
     });
 

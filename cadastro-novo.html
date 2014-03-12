@@ -1,347 +1,380 @@
-<div id="container">
+   <div id="container">
     <div class="header">
-        <a href="index.html"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
+      <a href="index.html"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
         <h1> Cadastro </h1>
-    </div>
-    <div class="body-container">
-        <form action="#" method="post" enctype="application/x-www-form-urlencoded" id="formUsuario">
-            <div class="content" align="center">
-                <!-- Expark Logo -->
-                <img src="imagens/logo.png" height="47" width="204"/>
-                <!-- Begin: table of contents -->
-                <table>
-                    <tr>
-                        <td colspan="2"><strong><font color="white">Dados Pessoais</font></strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Nome completo" id="nome" name="client[name]" size="30" type="text" />
-                        </td>
-                    </tr>
+   </div>
+   <div class="body-container">
+      <form action="#" method="post" enctype="application/x-w	ww-form-urlencoded" id="formUsuario">
+         <div class="content" align="center">
+            <!-- Expark Logo -->
+            <img src="imagens/logo.png" height="47" width="204"/>
+            <!-- Begin: table of contents -->
+            <table>
+			<tr>
+				<td colspan="2"><strong><font color="white">Dados Pessoais</font><strong></td>
+			</tr>
+				<tr>
+					<td>
+						<input placeholder="Nome completo" id="nome" name="client[name]" size="30" type="text" />
+					</td>
+				</tr>
+				
+				
+				<tr>
+					<td>
+						<input placeholder="Telefone Residencial" class="tel" id="telefone" name="client[telefone]" size="30" type="text" />
+					</td>
+				</tr>
+					
+				</tr>
+					<td>
+						<input placeholder="Email" id="email" name="client[user_attributes][email]" size="30" type="text" />
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				<tr>
+					<td colspan="2"><strong><font color="white">Dados do usuário</font><strong></td>
+				</tr>
+				<tr>
+					<td>
+						<input placeholder="Nome de usuario" id="loginuser" name="client[user_attributes][login]" size="30" type="text" />
+					</td>
+				</tr>
+				<tr>
+						<td>
+							<input placeholder="Senha" id="senha" name="client[user_attributes][password]" size="30" type="password" />
+						</td>
+				</tr>
+				<tr>
+					<td>
+						<input placeholder="Confirmar senha" id="retype-senha" name="client[user_attributes][password_confirmation]" size="30" type="password" />
+					</td>
+				</tr>
+				<tr>
+					<td>&nbsp;</td>
+					<td>&nbsp;</td>
+				</tr>
+				
+		<tr>
+            <td colspan="2"><strong><font color="white">Dados do cartão de crédito</font><strong></td>
+        </tr>
+        <tr>
+           <td>
+				<input placeholder="Número" id="card-number" name="client[card_attributes][number]" size="30" type="text" />
+			</td>
+        </tr>
+        <tr>
+           <td>
+				<input placeholder="Código de segurança" id="card-cvv" name="client[card_attributes][cvv]" size="30" type="text" />
+            </td>
+        </tr>
+        <tr>
+           <td>
+				<input placeholder="Nome no cartão" id="card-name" name="client[card_attributes][name]" size="30" type="text" />
+            </td>
+        </tr>
+        <tr>
+           <td>
+				<input placeholder="Data da expiração" id="card-data-expiracao" name="client[card_attributes][expiration_date]" size="30" type="text" />
+           </td>
+        </tr>
+		
 
-
-                    <tr>
-                        <td>
-                            <input placeholder="Telefone Residencial" class="tel" id="telefone" name="client[telefone]" size="30" type="text" />
-                        </td>
-                    </tr>
-
-                    </tr>
-                    <td>
-                        <input placeholder="Email" id="email" name="client[user_attributes][email]" size="30" type="text" />
-                    </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-                    <tr>
-                        <td colspan="2"><strong><font color="white">Dados do usuário</font></strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Nome de usuario" id="loginuser" name="client[user_attributes][login]" size="30" type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Senha" id="senha" name="client[user_attributes][password]" size="30" type="password" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Confirmar senha" id="retype-senha" name="client[user_attributes][password_confirmation]" size="30" type="password" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2"><strong><font color="white">Dados do cartão de crédito</font></strong></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Número" id="card-number" name="client[card_attributes][number]" size="30" type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Código de segurança" id="card-cvv" name="client[card_attributes][cvv]" size="30" type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Nome no cartão" id="card-name" name="client[card_attributes][name]" size="30" type="text" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input placeholder="Data da expiração" id="card-data-expiracao" name="client[card_attributes][expiration_date]" size="30" type="text" />
-                        </td>
-                    </tr>
-
-
-                </table>
-                <!-- begin: div of phones -->
-                <div id="addcell" align="center">
-                    <span>Adicionar celular na conta (seu, parentes, amigos, etc)</span>
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="text" pattern="[(]{1}[0-9]{2}[)]{1}[\s]{1}[0-9]{4}[-]{1}[0-9]{4}" id="phone" autocomplete="off" placeholder="Celular" class="number" title="Somente números."/>
-                            </td>
-                            <td style="background-color:#1C1C24;" align="center">
-                                <img src="imagens/24/adicionar24.png" height="24" width="24"/>
-                            </td>
-                        </tr>
-                    </table>
-                    <ul id="addedphones">
-                    </ul>
-                </div>
-
-                <input type="checkbox" id="c2" value=0 name="cc" />
-                <label for="c2">
-                    <!-- end: div of credit card -->
-                    <div id="terms" align="center">
-                        <span tabindex="12"></span>Li e concordo com o Termo de Uso<br/>
-                        e Adesão de Compra</label>
-            </div>
-            <div align="center">
-                <a href="#" class="button" id="cadastrar" style="display:none">Cadastrar</a>
-                <input type="button" value="Cadastrar" class="button" id="submit"  onclick="cadastrar()" style="margin-bottom:7%;margin-top:7% !important"/>
-            </div>
-    </div>
-</form>
-
-</div>
-<div class="modal" align="center">
-    <div class="title">
-        <span id="line"></span>
-        <div class="loader">
-            <span></span>
+            </table>
+			<!-- begin: div of phones -->
+        <div id="addcell" align="center">
+           <span>Adicionar celular na conta (seu, parentes, amigos, etc)</span>
+           <table>
+              <tr>
+                 <td>
+                    <input type="text" pattern="[(]{1}[0-9]{2}[)]{1}[\s]{1}[0-9]{4}[-]{1}[0-9]{4}" id="phone" autocomplete="off" placeholder="Celular" class="number" title="Somente números."/>
+                 </td>
+                 <td style="background-color:#1C1C24;" align="center">
+                    <img src="imagens/24/adicionar24.png" height="24" width="24"/>
+                 </td>
+              </tr>
+           </table>
+           <ul id="addedphones">
+           </ul>
         </div>
-    </div>
-</div>
-</div>
-<script>
-    $(document).ready(function() {
-        var items = [];
-        var addedScroll = false;
+       
+	   <input type="checkbox" id="c2" value=0 name="cc" /><label for="c2">
+		
+         <!-- end: div of credit card -->
+         <div id="terms" align="center">
+            
+            <span tabindex="12"></span>Li e concordo com o Termo de Uso<br/>
+            e Adesão de Compra</label>
+         </div>
+         <div align="center">
+            <a href="#" class="button" id="cadastrar" style="display:none">Cadastrar</a>
+            <input type="button" value="Cadastrar" class="button" id="submit"  onclick="cadastrar()" style="margin-bottom:7%;margin-top:7% !important"/>
+         </div>
+   </div>
+   </form>
+   
+   </div>
+   <div class="modal" align="center">
+      <div class="title">
+         <span id="line"></span>
+         <div class="loader">
+            <span></span>
+         </div>
+      </div>
+   </div>
+  </div>
+  <script>
+	 $(document).ready(function(){
+		var items = [];
+		var addedScroll = false;
 
-        //Definindo as mascaras
-        $("input#cellphone").mask('(99) 9999-9999');
-        $("input#phone").mask('(99) 9999-9999');
-        $("input#telefone").mask('(99) 9999-9999');
-        $("input#card-number").mask('9999 9999 9999 9999');
-        $("input#card-month").mask('99');
-        $("input#card-year").mask('9999');
-        //$("input#card-secret-code").mask('000');
-        $("input#card-data-expiracao").mask('99/99/9999');
+	   //Definindo as mascaras
+           $("input#cellphone").mask('(00) 0000-0000');
+           $("input#phone").mask('(00) 0000-0000');
+		   $("input#telefone").mask('(00) 0000-0000');
+           $("input#card-number").mask('0000 0000 0000 0000');
+           $("input#card-month").mask('00');
+           $("input#card-year").mask('0000');
+           $("input#card-secret-code").mask('000');
+		   $("input#card-data-expiracao").mask('00/00/0000');
 
-        $("div#addcell table tr td img").click(function() {
-            //E o campo input ( para adição dos telefones ) ter conteudo maior que 0
-            if ($("input#phone").val().trim().length > 0) {
-                //Adiciona a lista de itens, uma <li>
-                $("ul#addedphones").append('<li class="addeditem"><span id="phone">' + $("div.content input#phone").val() + '</span><span id="btn-remover"><img src="imagens/24/remover24.png"/></span><div style="clear:both"></div></li>');
-                //Zera o conteudo do input
-                $("div.content input[type=number]").val('');
+  
+	  if ('ajaxPrefilter' in $) 
+		$.ajaxPrefilter(function(options, originalOptions, xhr) { 
+		  options.xhrFields = {
+				withCredentials: true
+			  };
+		  
+		  CSRFProtection(xhr); 
+		});
+	  else 
+		$(document).ajaxSend(function(e, xhr) { CSRFProtection(xhr); });
+		
+		$("div#addcell table tr td img").click(function(){
+         //E o campo input ( para adição dos telefones ) ter conteudo maior que 0
+         if($("input#phone").val().trim().length > 0){
+           //Adiciona a lista de itens, uma <li>
+           $("ul#addedphones").append('<li class="addeditem"><span id="phone">'+$("div.content input#phone").val()+'</span><span id="btn-remover"><img src="imagens/24/remover24.png"/></span><div style="clear:both"></div></li>');
+           //Zera o conteudo do input
+           $("div.content input[type=number]").val('');
+     
+           //Evento para eliminar os itens que forem cadastrados erroneamente
+           $("span#btn-remover").click(function(event) {
+             $(this).parent().remove();
+           });      
+         }
+         else{
+           //Se o campo estiver vazio, exibe uma mensagem ao usuário
+           //AlertDialog('teste','informe o telefone',2800);
+		   alert('informe o telefone');
+         }
+       });
+	   
+	   $("div#terms").click(function(e){
+			    $("div#terms input[type=checkbox]").prop('checked',false);
+			    //Adiciona classe de formatação a modal
+				$("div.title").addClass('terms-title');
+				$("div.title span#line").text("Termos");
+				$("div.loader").html("<p>Lorem ipsum dolor sit amet. Aliquam erat volutpat. Maecenas non tortor nulla, non malesuada velit.</p><p>Aliquam erat volutpat. Maecenas non tortor nulla, non malesuada velit. Nullam felis tellus, tristique nec egestas in, luctus sed diam. Suspendisse potenti. </p><p>Consectetur adipiscing elit. Nulla consectetur libero consectetur quam consequat nec tincidunt massa feugiat. Donec egestas mi turpis. Fusce adipiscing dui eu metus gravida vel facilisis ligula iaculis. Cras a rhoncus massa. Donec sed purus eget nunc placerat consequat.</p><p>Cras venenatis condimentum nibh a mollis. Duis id sapien nibh. Vivamus porttitor, felis quis blandit tincidunt, erat magna scelerisque urna, a faucibus erat nisl eget nisl. Aliquam consequat turpis id velit egestas a posuere orci semper. Mauris suscipit erat quis urna adipiscing ultricies. In hac habitasse platea dictumst. Nulla scelerisque lorem quis dui sagittis egestas.</p> <p>Etiam sed massa felis, aliquam pellentesque est.</p><p>Nam eu arcu at purus tincidunt pharetra ultrices at ipsum. Mauris urna nunc, vulputate quis gravida in, pharetra id mauris. Ut sit amet mi dictum nulla lobortis adipiscing quis a nulla. Etiam diam ante, imperdiet vel scelerisque eget, venenatis non eros. Praesent ipsum sem, eleifend ut gravida eget, tristique id orci. Nam adipiscing, sem in mattis vulputate, risus libero adipiscing risus, eu molestie mi justo eget nulla.</p> <p>Cras venenatis metus et urna egestas non laoreet orci rutrum. Pellentesque ullamcorper dictum nisl a tincidunt. Quisque et lacus quam, sed hendrerit mi. Mauris pretium, sapien et malesuada pulvinar, lorem leo viverra leo, et egestas mi nisl quis odio. </p><p>Aliquam erat volutpat. Sed urna arcu, tempus eu vulputate adipiscing, consectetur et orci. Vivamus congue, nunc vitae fringilla convallis, libero massa lacinia lorem, id convallis mauris elit ut leo. Nulla vel odio sem. Duis lorem urna, congue vitae rutrum sed, tincidunt vel tortor. In hac habitasse platea dictumst. Nunc vitae enim ante, vitae facilisis massa. Etiam sagittis sapien at nibh fermentum consectetur convallis lacus blandit.</p><p>the end.</p><div id='controls'><button id='sim' class='actionbuttons'><legend>Concordo</legend></button><button id='nao' class='actionbuttons'><legend>Discordo</legend></button>");
+				$("div.modal").addClass('js-modal').fadeIn('slow').css({'height':'100%'});
+				$("body").css('overflow','hidden');
+				if(addedScroll == false){
+					$("div.title").mCustomScrollbar({
+						scrollButtons:{
+							enable:true
+						},
+						theme:"dark-2"
+					});
+					addedScroll = true;
+				}
+				
+				   $("button#sim.actionbuttons").click(function(e){
+					    RemoverPersonalizacoes();
+		   				$("input[type=checkbox]").prop('checked',true);
+						
+				   });
+				   
+				   $("div#controls button#nao").click(function(e){
+						RemoverPersonalizacoes();
+						$("input[type=checkbox]").prop('checked',false);
+		   		   });
+			});
+	
+	function RemoverPersonalizacoes(){
+		   	 $("div.title").removeClass('terms-title');
+			 $("div.loader").html();
+			 $("body").css('overflow','visible');
+			 $("div.modal").fadeOut('fast');
+		   }
+	  
+	});
+	
+	
+	
+	
+	
+	function CSRFProtection(xhr) {
 
-                //Evento para eliminar os itens que forem cadastrados erroneamente
-                $("span#btn-remover").click(function(event) {
-                    $(this).parent().remove();
-                });
-            }
-            else {
-                //Se o campo estiver vazio, exibe uma mensagem ao usuário
-                //AlertDialog('teste','informe o telefone',2800);
-                alert('informe o telefone');
-            }
-        });
+	  var token = $('meta[name="csrf-token"]').attr('content');
+	  if (token) 
+		xhr.setRequestHeader('X-CSRF-Token', token);
 
-        $("div#terms").click(function(e) {
-            $("div#terms input[type=checkbox]").prop('checked', false);
-            //Adiciona classe de formatação a modal
-            $("div.title").addClass('terms-title');
-            $("div.title span#line").text("Termos");
-            $("div.loader").html("<p>Lorem ipsum dolor sit amet. Aliquam erat volutpat. Maecenas non tortor nulla, non malesuada velit.</p><p>Aliquam erat volutpat. Maecenas non tortor nulla, non malesuada velit. Nullam felis tellus, tristique nec egestas in, luctus sed diam. Suspendisse potenti. </p><p>Consectetur adipiscing elit. Nulla consectetur libero consectetur quam consequat nec tincidunt massa feugiat. Donec egestas mi turpis. Fusce adipiscing dui eu metus gravida vel facilisis ligula iaculis. Cras a rhoncus massa. Donec sed purus eget nunc placerat consequat.</p><p>Cras venenatis condimentum nibh a mollis. Duis id sapien nibh. Vivamus porttitor, felis quis blandit tincidunt, erat magna scelerisque urna, a faucibus erat nisl eget nisl. Aliquam consequat turpis id velit egestas a posuere orci semper. Mauris suscipit erat quis urna adipiscing ultricies. In hac habitasse platea dictumst. Nulla scelerisque lorem quis dui sagittis egestas.</p> <p>Etiam sed massa felis, aliquam pellentesque est.</p><p>Nam eu arcu at purus tincidunt pharetra ultrices at ipsum. Mauris urna nunc, vulputate quis gravida in, pharetra id mauris. Ut sit amet mi dictum nulla lobortis adipiscing quis a nulla. Etiam diam ante, imperdiet vel scelerisque eget, venenatis non eros. Praesent ipsum sem, eleifend ut gravida eget, tristique id orci. Nam adipiscing, sem in mattis vulputate, risus libero adipiscing risus, eu molestie mi justo eget nulla.</p> <p>Cras venenatis metus et urna egestas non laoreet orci rutrum. Pellentesque ullamcorper dictum nisl a tincidunt. Quisque et lacus quam, sed hendrerit mi. Mauris pretium, sapien et malesuada pulvinar, lorem leo viverra leo, et egestas mi nisl quis odio. </p><p>Aliquam erat volutpat. Sed urna arcu, tempus eu vulputate adipiscing, consectetur et orci. Vivamus congue, nunc vitae fringilla convallis, libero massa lacinia lorem, id convallis mauris elit ut leo. Nulla vel odio sem. Duis lorem urna, congue vitae rutrum sed, tincidunt vel tortor. In hac habitasse platea dictumst. Nunc vitae enim ante, vitae facilisis massa. Etiam sagittis sapien at nibh fermentum consectetur convallis lacus blandit.</p><p>the end.</p><div id='controls'><button id='sim' class='actionbuttons'><legend>Concordo</legend></button><button id='nao' class='actionbuttons'><legend>Discordo</legend></button>");
-            $("div.modal").addClass('js-modal').fadeIn('slow').css({'height': '100%'});
-            $("body").css('overflow', 'hidden');
-            if (addedScroll == false) {
-                $("div.title").mCustomScrollbar({
-                    scrollButtons: {
-                        enable: true
-                    },
-                    theme: "dark-2"
-                });
-                addedScroll = true;
-            }
-
-            $("button#sim.actionbuttons").click(function(e) {
-                RemoverPersonalizacoes();
-                $("input[type=checkbox]").prop('checked', true);
-
-            });
-
-            $("div#controls button#nao").click(function(e) {
-                RemoverPersonalizacoes();
-                $("input[type=checkbox]").prop('checked', false);
-            });
-        });
-
-        function RemoverPersonalizacoes() {
-            $("div.title").removeClass('terms-title');
-            $("div.loader").html();
-            $("body").css('overflow', 'visible');
-            $("div.modal").fadeOut('fast');
-        }
-
-    });
-
-
-    function cadastrar() {
-        event.preventDefault();
-
-        var items = [];
-
-
-        $('ul#addedphones li span#phone').each(function() {
-            var $this = $(this);
-            var item = {phone: $this.html()};
-            items.push(item);
-
-        });
-
-        if (
-                $("#nome").val() == ''
-                || $("#telefone").val() == ''
-                || $("#email").val() == ''
-                || $("#senha").val() == ''
-                || $("#retype-senha").val() == ''
-                || $("#loginuser").val() == ''
-                || $("#card-cvv").val() == ''
-                || $("#card-data-expiracao") == ''
-                || $("#card-name").val() == ''
-                || $("#card-number").val() == ''
-                )
-        {
-            alert("Todos os campos devem ser preenchidos");
-        }
-        else if (items.length < 1)
-        {
-            alert("Tem que adicionar pelo menos 1 telefone celular na conta");
-        }
-        else
-        {
-            if (!document.getElementById('c2').checked)
-            {
-                alert('Para se cadastrar tem que concordar com os termos');
-            }
-            else
-            {
-
-                var invalid_password = false;
-                var default_url = "http://desenvolvimento.xavante.net.br:82";
-                //Li2Json();
-                $('#modal').show();
-                $.ajax({
-                    url: default_url + '/usuarios.json',
-                    data: {
-                        client: {
-                            name: $("#nome").val(),
-                            telefone: $("#telefone").val(),
-                            user_attributes: {
-                                email: $("#email").val(),
-                                password: $("#senha").val(),
-                                password_confirmation: $("#retype-senha").val(),
-                                login: $("#loginuser").val(),
-                            },
-                            phones_attributes: items,
-                            card_attributes: {
-                                cvv: $("#card-cvv").val(),
-                                expiration_date: $("#card-data-expiracao").val(),
-                                name: $("#card-name").val(),
-                                number: $("#card-number").val()
-                            }
-                        }},
-                    dataType: "json",
-                    type: 'POST',
-                    context: jQuery('#resultado'),
-                    success: function(data) {
-                        $('#modal').hide();
-                        if (data.name == $("#nome").val())
-                        {
-                            alert("Cadastrado com sucesso");
-                            window.location.href = "index.html";
-                        }
-                        else
-                            alert(data);
-
-                    }
-                });
-            }
-        }
-    }
-
-</script>
-<style type="text/css">
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button{
-        /* display: none; <- Crashes Chrome on hover */
-        -webkit-appearance: none;
-        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
-    }
-    div.title{
-        background-color: #FFFFFF;
-        margin: 4% auto auto;
-        padding: 8px 3px;
-        width: 89%;
-    }
-    div.loader span{
-        font-size:0.8rem;
-        font-family:Georgia, "Times New Roman", Times, serif;
-    }
-    div.loader {
-        text-align: left;
-    }
-
-    div#controls{
-        border-bottom: thin solid #999999;
-        border-top: thin solid #999999;
-        margin-bottom: 3%;
-        margin-top: 1%;
-        padding-bottom: 2%;
-        padding-top: 2%;
-        text-align: center;
-        width: 100%;
-    }
-    button:nth-child(1){
-        background-color: #134F67 !important;
-        margin-right:2%;
-    }
-    button:nth-child(2){
-        background-color: #671319 !important;
-    }
-    .actionbuttons{
-        border: medium none;
-        border-radius: 3px 3px 3px 3px;
-        color: #FFFFFF;
-        display: inline-block;
-        font-size: 1.1rem;
-        height: 20%;
-        padding: 8px;
-        width: 33%;
-        cursor:pointer;
-    }
-    @media only screen and (min-width: 320px) and (orientation:landscape)
-    {
-        div.title{
-            height: 86% !important;
-        }
-    }
-</style>
-
-<div id="modal" >
+	}
+  
+	function cadastrar(){
+		event.preventDefault();
+		
+		var items = [];
+	
+		
+		$('ul#addedphones li span#phone').each(function() {
+           var $this = $(this);
+           var item = {phone: $this.html()};
+			items.push(item);
+		  			
+		});
+		 
+		if (
+				$("#nome").val() 			== ''
+			||	$("#telefone").val() 		== ''
+			||  $("#email").val() 			== ''
+			||  $("#senha").val()		 	== ''
+			|| 	$("#retype-senha").val() 	== ''
+			||  $("#loginuser").val() 		== ''
+			||  $("#card-cvv").val() 		== ''
+			||  $("#card-data-expiracao")	== ''
+			||  $("#card-name").val() 		== ''
+			||  $("#card-number").val() 	== ''
+		)
+		{
+			alert("Todos os campos devem ser preenchidos");
+		}
+		else if(items.length < 1)
+		{
+			alert("Tem que adicionar pelo menos 1 telefone celular na conta");
+		}
+		else
+		{
+			if(!document.getElementById('c2').checked)
+			{    
+				alert('Para se cadastrar tem que concordar com os termos');
+			}
+			else
+			{
+				
+				var invalid_password = false;
+				var default_url = "http://desenvolvimento.xavante.net.br:82";
+				//Li2Json();
+				$('#modal').show();
+				$.ajax({
+					url: default_url+'/usuarios.json',
+					data: {
+						client: {
+							name: 			$("#nome").val(),
+							telefone: 		$("#telefone").val(),
+							user_attributes: {
+								email: 					$("#email").val(),
+								password: 				$("#senha").val(),
+								password_confirmation: 	$("#retype-senha").val(), 
+								login: 					$("#loginuser").val(),
+							}, 
+							phones_attributes: items,
+							card_attributes: {
+								card_alias: 				$("#card-cvv").val(), 
+								card_expiration: 			$("#card-data-expiracao").val(),
+								custome_holder: 			$("#card-name").val(),
+								card_number: 				$("#card-number").val()
+							}
+						}},
+					dataType: "json",
+					type: 'POST',
+					context: jQuery('#resultado'),
+					success: function(data){
+						$('#modal').hide();
+						if(data.name == $("#nome").val())
+						{
+							alert("Cadastrado com sucesso");
+							window.location.href = "index.html";
+						}
+						else
+							alert(data);
+						                 
+					}
+				});
+			}
+		}					
+	}
+  
+  </script>
+  <style type="text/css">
+         input::-webkit-outer-spin-button,
+         input::-webkit-inner-spin-button{
+         /* display: none; <- Crashes Chrome on hover */
+         -webkit-appearance: none;
+         margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+         }
+		 div.title{
+			 background-color: #FFFFFF;
+			margin: 4% auto auto;
+			padding: 8px 3px;
+			width: 89%;
+		 }
+		 div.loader span{
+		 	font-size:0.8rem;
+			font-family:Georgia, "Times New Roman", Times, serif;
+		 }
+		 div.loader {
+			text-align: left;
+		}
+		
+		div#controls{
+			border-bottom: thin solid #999999;
+			border-top: thin solid #999999;
+			margin-bottom: 3%;
+			margin-top: 1%;
+			padding-bottom: 2%;
+			padding-top: 2%;
+			text-align: center;
+			width: 100%;
+		}
+		button:nth-child(1){
+			background-color: #134F67 !important;
+			margin-right:2%;
+		}
+		button:nth-child(2){
+			background-color: #671319 !important;
+		}
+		.actionbuttons{
+			border: medium none;
+			border-radius: 3px 3px 3px 3px;
+			color: #FFFFFF;
+			display: inline-block;
+			font-size: 1.1rem;
+			height: 20%;
+			padding: 8px;
+			width: 33%;
+			cursor:pointer;
+		}
+		@media only screen and (min-width: 320px) and (orientation:landscape)
+		{
+			div.title{
+				height: 86% !important;
+		 	}
+		}
+      </style>
+  
+  <div class="modal" align="center">
+      <div class="title">
+         <span id="line"></span>
+         <div class="loader">
+            <span></span>
+         </div>
+      </div>
+   </div>
+   
+  <div id="modal" >
     <h2>Carregando...</h2>
-</div>
+  </div>

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>ExPark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" src="js/jquery-2.0.3.min.js"></script>
+    <script type="text/javascript" src="js/jquery.mobile.custom/jquery.mobile.custom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/jquery.mobile.custom/jquery.mobile.custom.structure.min.css">
+    <link rel="stylesheet" type="text/css" href="css/GeneralStyle.css">
+
+    <script type="text/javascript" charset="utf-8">
+        //*********************************************************
+        // Espere o Cordova Carregar
+        //*********************************************************
+        document.addEventListener("deviceready", onDeviceReady, false);
+            function onDeviceReady() {
+                //$("#content").html("Hello, World! Demo  JQuery Mobile com PhoneGap 2!");
+                window . location = './app.html' 
+            }
+    </script>
+</head>
+<body>
+    <div data-role="page" id="main">        
+        <div id="content" data-role="content" style="text-align:center; height:250px; padding-top:50%; padding:auto 0;">
+            <img src="imagens/logo.png" height="47" width="204"/>
+            <h2 style="color:#ffffff">Carregando...</h2>
+        </div>
+    </div>
+</body>
+</html>

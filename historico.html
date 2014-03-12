@@ -5,16 +5,17 @@
 <div class="content" align="center">
   <div id="background-div" id='wrapper'>
     <table id="history-table">
+        <thead>
           <tr id="table-header">
             <th>Vaga</th>
-            <th>Data</th>
-            <th>↑/↓</th>
-            <!--<th>Autorizado</th> -->
+            <th>Entrada</th>
+            <th>Saída</th>          
             <th>Valor</th>
           </tr>
-          <tbody id="history_list">
-              
-          </tbody>
+        </thead>  
+        <tbody id="history_list">
+          <tr><td></td><td></td><td></td><td></td></tr> 
+        </tbody>
             
           
         </table>
@@ -23,7 +24,7 @@
     <script type="text/javascript">
 
       $(document).ready(function(){
-        var default_url = "http://desenvolvimento.xavante.net.br:82";
+        //var default_url = "http://desenvolvimento.xavante.net.br:82";
         
         $.ajax({
           beforeSend: function () {
@@ -40,15 +41,16 @@
             for($i=0; $i < data.length; $i++){
               //console.log("Vaga" + data[$i].vacancy);
               //console.log("Método" + data[$i].method);
-              $('#history-table tr:last').after(
+              $('#history-table #history_list tr:last').after(
                 '<tr>'+
-                  '<td align="center">'+ data[$i].vacancy           +'</td>' +
-                      '<td align="center"> '+ data[$i].entry_time   +' </td>' +
-                      '<td align="center"> '+ data[$i].exit_time    +' </td>' +                   
-                      '<td >'+ data[$i].utilized_credit             +'</td>' +
-                  '</tr>'
+                    '<td align="center"> '+ data[$i].vacancy      +'</td>' +
+                    '<td align="center"> '+ data[$i].entry_time   +'</td>' +
+                    '<td align="center"> '+ data[$i].exit_time    +'</td>' +                   
+                    '<td >'+ data[$i].utilized_credit             +'</td>' +
+                '</tr>'
               );
             }
+            $('#history-table #history_list tr:nth-child(1)').remove();
           },
           failure: function () {
             console.log("Falhou");

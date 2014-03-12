@@ -92,7 +92,9 @@
           }); 
           
           $('#comprar-credito').click(function() {
-            alert("Funcionalidade ainda não disponível");
+            $('#comprar-credito').load('comprar-credito.html', function() {
+              $.mobile.navigate("#comprar-credito");
+            });
           });
 
         })
