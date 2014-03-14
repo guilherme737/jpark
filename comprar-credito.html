@@ -35,16 +35,19 @@
           <input type="radio" name="tipo-unidade" value="hours" style="margin-left:5px">Horas
           <input type="radio" name="tipo-unidade" value="money" style="margin-left:5px">Reais
         </div>
-        <div><input type="text" id="valor" name="valor" style="font-size:2.1em !important; margin-top:5px;" maxlength="5" autofocus></div>
+        <div><input type="text" id="valor" name="valor" style="font-size:2.1em !important; margin-top:5px; width:48%;" maxlength="5" autofocus></div>
         <div style="margin-top:5px;">Confirme sua SENHA e efetive sua compra.</div>  
         <table>      
           <tr>
-            <td style="width:50%"><input type="text" id="confirma-senha" name="confirma-senha" style="font-size:1.5em !important" place-holder="Senha"></td>          
-            <td><input id="pagar-cartao" type="button" value="Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito" class="button pagar-cartao"/></td>          
+            <td style="width:50%"><input type="password" id="confirma-senha" name="confirma-senha" style="font-size:1em !important; width:48%;"></td>
+            <td><input id="efetuar-pagamento" type="button" value="Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito" class="button pagar-cartao"/></td>          
           </tr>
         </table>       
       </div>
       <br/><br/>
+  </div>
+  <div id="modal" >
+    <h2>Carregando...</h2>
   </div>
       <script type="text/javascript">
 
@@ -78,13 +81,13 @@
 
           $('#efetuar-pagamento').click(function() {
             //var default_url = "http://desenvolvimento.xavante.net.br:82";
-
+            $('#modal').show();
             if ( $('#valor').val() > 0 ) {
               $.ajax({
                 type: "POST",
                 //contentType: "application/json; charset=utf-8", 
                 dataType: "json", 
-                url: default_url+'/checkout',
+                url: default_url+'/mobile_checkout.json',
                 data: { 
                     password_confirmation: $('#confirma-senha').val(),
                     credit_type: $( "input:radio[name=tipo-unidade]:checked" ).val(), //"[hours/money]",
@@ -93,13 +96,25 @@
                     }                                      
                 },
                 success: function(data) {
-                  console.log(data);
+                  $('#modal').hide();
+                  console.log(data.success);
                   alert(data.message);                
                 }, 
                 failure: function () {
-                  alert("Falha ao efetuar o checkin para essa vaga.");  
+                  alert("Falha ao efetuar pagamento. Por favor tente novamente.");  
+                },
+                statusCode: {
+                    0: function() {
+                        $('#modal').hide();
+                        alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+                    },                
+                    500:function() {
+                        $('#modal').hide();
+                        alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
+                    }
                 }
               });
+              $('#modal').hide();
             } else {
               alert('Informe um valor maior que zero.');
             }
