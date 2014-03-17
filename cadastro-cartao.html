@@ -1,0 +1,126 @@
+   <div id="container">
+    <div class="header">
+      <a href="#credencial"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
+        <h1> Cadastro </h1>
+   </div>
+   <div class="body-container">
+      <form action="#" method="post" enctype="application/x-w	ww-form-urlencoded" id="formUsuario">
+         <div class="content" align="center">
+            <!-- Expark Logo -->
+            <img src="imagens/logo.png" height="47" width="204"/>
+            <!-- Begin: table of contents -->
+            <table>
+				<tr>
+					<td colspan="2"><strong><font color="white"></font><strong></td>
+				</tr>
+				<tr>
+		            <td colspan="2" style='color:#fff; font-weight:bold; text-align:center'>
+		            	Você precisa ter um cartão cadastrado para acessar essa funcionalidade.<br/><br/> Informe abaixo os dados do cartão.
+		            </td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Número" id="card-number" name="client[card_attributes][number]" size="30" type="text" />
+					</td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Código de segurança" id="card-cvv" name="client[card_attributes][cvv]" size="30" type="text" />
+		            </td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Nome no cartão" id="card-name" name="client[card_attributes][name]" size="30" type="text" />
+		            </td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Data da expiração" id="card-data-expiracao" name="client[card_attributes][expiration_date]" size="30" type="text" />
+		           </td>
+		        </tr>
+	        </table>
+			<!-- begin: div of phones -->
+        
+         <div align="center">
+            <!--<a href="#" class="button" id="cadastrar" style="display:none">Cadastrar</a>-->
+            <input type="button" value="Cadastrar" class="button" id="submit"  onclick="cadastrarCartao()" style="margin-bottom:7%;margin-top:7% !important"/>
+         </div>
+   </div>
+   </form>
+   
+   </div>
+   <div class="modal" align="center">
+      <div class="title">
+         <span id="line"></span>
+         <div class="loader">
+            <span></span>
+         </div>
+      </div>
+   </div>
+  </div>
+  <script>
+	 $(document).ready(function(){
+		
+	   //Definindo as mascaras
+       $("input#card-month").mask('00');
+       $("input#card-year").mask('00');
+       
+	});
+	
+  
+	function cadastrarCartao() {
+		//event.preventDefault();
+		
+		if (	$("#card-cvv").val() 		== ''
+			||  $("#card-data-expiracao")	== ''
+			||  $("#card-name").val() 		== ''
+			||  $("#card-number").val() 	== '' ) {
+			alert("Todos os campos devem ser preenchidos");
+		
+		} else {
+			
+			var default_url = "http://desenvolvimento.xavante.net.br:3002";
+			
+			$('#modal').show();
+			$.ajax({
+				url: default_url+"/users.json",
+				data: {
+					client: {							
+						card_attributes: {
+							card_alias: 				$("#card-cvv").val(), 
+							card_expiration: 			$("#card-data-expiracao").val(),
+							custome_holder: 			$("#card-name").val(),
+							card_number: 				$("#card-number").val()
+						}
+					}},
+				dataType: "json",
+				type: 'PUT',
+				context: jQuery('#resultado'),
+				success: function(data){
+					$('#modal').hide();
+					if(data.name == $("#nome").val()) {
+						alert("Cartão cadastrado com sucesso.");
+						$('#comprar-credito').load('comprar-credito.html', function() {
+			              $.mobile.navigate("#comprar-credito");
+			            });
+					}                
+				}
+			});
+		}
+							
+	}
+  
+  </script>
+ 
+  <div class="modal" align="center">
+      <div class="title">
+         <span id="line"></span>
+         <div class="loader">
+            <span></span>
+         </div>
+      </div>
+   </div>
+   
+  <div id="modal" >
+    <h2>Carregando...</h2>
+  </div>
