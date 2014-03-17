@@ -1,7 +1,7 @@
 
   <div class="header">
     <h1> Estacionamento </h1>
-    <a href="#sign_out" class="sign_out">sair</a>
+    <a href="/sign_out" class="sign_out">sair</a>
   </div>
   <div class="content" align="center" id="acesso">
     <img src="imagens/logo.png" height="47" width="204"/>
@@ -70,10 +70,38 @@
       });
     });
 
-    $('#menu-cc').click(function() {      
-      $('#comprar-credito').load('comprar-credito.html', function() {
-        $.mobile.navigate("#comprar-credito");
-      });
+    $('#menu-cc').click(function() {  
+
+      //$.getJSON(default_url+'/credit_cards.json').success(function(data){console.log("Dados" + data) })
+
+      $.ajax({
+        type: "GET",            
+        dataType: "json", 
+        url: default_url+'/credit_cards.json',
+       
+        success: function(data) {
+          if (data != null) {
+            console.log(data);
+            console.log("Card-Alias: " + data.alias);
+            console.log("Card-ID: " + data.card_id);  
+
+            $('#comprar-credito').load('comprar-credito.html', function() {
+              $.mobile.navigate("#comprar-credito");
+            });
+          } else {
+            //alert('Você precisa ter um cartão cadastrado para acessar essa funcionalidade.');
+            $('#cadastro-cartao').load('cadastro-cartao.html', function() {
+              $.mobile.navigate("#cadastro-cartao");
+            });
+          }
+          
+        }, 
+        failure: function () {
+          //alert("Falha ao obter saldo atual.");  
+        }
+      });  
+
+      
     });
 
 
