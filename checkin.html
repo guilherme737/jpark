@@ -1,7 +1,3 @@
-  
-  <style type="text/css">
-    
-  </style>
   <div class="header">
     <a href="#home" ><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
     <h1> Check-in </h1>
@@ -27,8 +23,8 @@
         <div>Saldo atual</div>  
         <table>      
           <tr>
-            <td><input type="text" id="saldo" name="saldo" readonly="true" value="02h37"></td>
-            <td><input id="comprar-credito" type="button" value="Comprar crédito" class="button"/></td>          
+            <td><input type="text" id="saldo" name="saldo" readonly="true" value=""></td>
+            <td><button id="comprar-credito" type="button" class="button">Comprar cr&eacute;dito</button></td>
           </tr>
         </table>       
       </div>
@@ -40,10 +36,10 @@
             <td rowspan="3" style="width:50%"><input type="text" id="vaga" name="vaga" class="campo-vaga" style="font-size:2.1em !important" maxlength="7" autofocus></td>
           </tr> 
           <tr>
-            <td><input id="pagar-saldo" type="button" value="Pagar com &#13;&#10; seu saldo" class="button pagar-saldo"/></td>
+            <td><button id="pagar-saldo" type="button" class="button pagar-saldo">Pagar com &#13;&#10; seu saldo 2</button></td>
           </tr>
           <tr>
-            <td><input id="pagar-cartao" type="button" value="Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito" class="button pagar-cartao"/></td>          
+            <td><button id="pagar-cartao" type="button" class="button pagar-cartao">Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito</button></td>
           </tr>
         </table>       
       </div>
@@ -52,9 +48,21 @@
       <script type="text/javascript">
 
         $(document).ready(function(){
+		
+		   $.ajax({
+            type: "GET",            
+            dataType: "json", 
+            url: default_url+'/current_amount.json',           
+            success: function(data) {              
+              $('#saldo').val(data);
+            }, 
+            failure: function () {
+              alert("Falha ao obter saldo atual.");  
+            }
+          });	
 
           $('#pagar-saldo').click(function() {
-            var default_url = "http://desenvolvimento.xavante.net.br:82";
+            //var default_url = "http://desenvolvimento.xavante.net.br:82";
 
             if ( $('#vaga').val() > 0 ) {
               $.ajax({
@@ -75,8 +83,6 @@
               alert('Informe a vaga que deseja estacionar.');
             }
             
-            
-          
             /*  
             $.post(default_url+'/validations.json', 
                 {validation: {id_parking_space: $('#vaga').val()}},

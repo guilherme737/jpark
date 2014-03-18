@@ -32,15 +32,15 @@
         <div id="valor-hora"></div>  
         <div>
           Comprar valor em:
-          <input type="radio" name="tipo-unidade" value="hours" style="margin-left:5px">Horas
-          <input type="radio" name="tipo-unidade" value="money" style="margin-left:5px">Reais
+          <input type="radio" id="tipo-hora" name="tipo-unidade" value="hours" style="margin-left:5px" checked>Horas</input>
+          <input type="radio" id="tipo-reais" name="tipo-unidade" value="money" style="margin-left:5px">Reais</input>
         </div>
         <div><input type="text" id="valor" name="valor" style="font-size:2.1em !important; margin-top:5px; width:48%;" maxlength="5" autofocus></div>
         <div style="margin-top:5px;">Confirme sua SENHA e efetive sua compra.</div>  
         <table>      
           <tr>
             <td style="width:50%"><input type="password" id="confirma-senha" name="confirma-senha" style="font-size:1em !important; width:48%;"></td>
-            <td><input id="efetuar-pagamento" type="button" value="Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito" class="button pagar-cartao"/></td>          
+            <td><button id="efetuar-pagamento" type="button" class="button pagar-cartao">Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito</button></td>          
           </tr>
         </table>       
       </div>

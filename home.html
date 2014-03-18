@@ -1,7 +1,7 @@
 
   <div class="header">
     <h1> Estacionamento </h1>
-    <a href="/sign_out" class="sign_out">sair</a>
+    <a href="" id="sair" class="sign_out">sair</a>
   </div>
   <div class="content" align="center" id="acesso">
     <img src="imagens/logo.png" height="47" width="204"/>
@@ -104,5 +104,14 @@
       
     });
 
-
+	$('#sair').click(function() { 
+		$.ajax({
+			type: "DELETE",
+			dataType: "json", 
+			url: default_url+'/sign_out',       
+			success: function(data) {
+				$.mobile.navigate("#credencial");
+			}	
+		})
+	})	
   </script>
