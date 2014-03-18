@@ -20,13 +20,16 @@
       </div>
       <br/>
       <div style="background-color:#111; padding-top:10px">
-        <div>Saldo atual</div>  
+        <div style="font-size:1.5em; padding-bottom: 5px">Saldo atual</div> 
+        <div id="saldo" style="font-size:1.5em; padding-bottom: 5px"></div> 
+        <!--
         <table>      
           <tr>
             <td><input type="text" id="saldo" name="saldo" readonly="true" value=""></td>
             <td><button id="comprar-credito" type="button" class="button">Comprar cr&eacute;dito</button></td>
           </tr>
         </table>       
+        -->
       </div>
       <br/>
       <div style="background-color:#111; padding-top:10px">
@@ -54,7 +57,7 @@
             dataType: "json", 
             url: default_url+'/current_amount.json',           
             success: function(data) {              
-              $('#saldo').val(data);
+              $('#saldo').html(data);
             }, 
             failure: function () {
               alert("Falha ao obter saldo atual.");  

@@ -8,7 +8,7 @@
     <table>      
       <tr>
         <td>
-          <a href="#order" class="link-buttons">
+          <a href="" id="menu-cc" class="link-buttons">
             <img src="imagens/24/entrada24.png"/>COMPRAR - Clique para comprar crédito
           </a>
         </td>
@@ -23,24 +23,17 @@
       <tr>
         <td>
           <a href="" id="menu-historico" class="link-buttons">
-            <img src="imagens/24/list24.png"/>Histórico
+            <img src="imagens/24/list24.png"/>HIST&Oacute;RICO - Clique para visualizar
           </a>
         </td>
       </tr>
       <tr>
         <td>
           <a href="" id="menu-cadastro-editar" class="link-buttons">
-            <img src="imagens/24/user24.png"/>Dados Cadastro
+            <img src="imagens/24/user24.png"/>DADOS CADASTRO - Clique para editar
           </a>
         </td>
-      </tr>
-      <tr>
-        <td>
-          <a href="" id="menu-cc" class="link-buttons">
-            <img src="imagens/24/user24.png"/>Comprar Crédito
-          </a>
-        </td>
-      </tr>
+      </tr>      
    </table>
   </div>
   <div class="modal" align="center">
@@ -108,7 +101,7 @@
 		$.ajax({
 			type: "DELETE",
 			dataType: "json", 
-			url: default_url+'/sign_out',       
+			url: default_url+'/users/sign_out',       
 			success: function(data) {
 				$.mobile.navigate("#credencial");
 			}	
