@@ -147,22 +147,10 @@
            $("input#card-secret-code").mask('999');
 		   $("input#card-data-expiracao").mask('99/99/9999');
 		   
-		   
-		   if ('ajaxPrefilter' in $) 
-			$.ajaxPrefilter(function(options, originalOptions, xhr) { 
-			  options.xhrFields = {
-					withCredentials: true
-				  };
-			  
-			  CSRFProtection(xhr); 
-			});
-		  else 
-			$(document).ajaxSend(function(e, xhr) { CSRFProtection(xhr); });
 			
-		var default_url = "http://desenvolvimento.xavante.net.br:82";		
+		//var default_url = "http://desenvolvimento.xavante.net.br:82";		
 		 $.ajax({
-          type: "GET",
-		  //data: {user: {current_password: '123456'}},
+          type: "GET",		  
           url: default_url+"/edit_user.json",
           //contentType: "application/json; charset=utf-8", 
             dataType: "json", 
@@ -187,8 +175,7 @@
           },
           failure: function () {
             console.log("Falhou");
-          }
-		  
+          }		  
 		  
         });
 		
@@ -214,17 +201,7 @@
 			   alert('informe o telefone');
              }
            });
-		   
-		   function CSRFProtection(xhr) {
-
-		  var token = $('meta[name="csrf-token"]').attr('content');
-		  if (token) 
-			xhr.setRequestHeader('X-CSRF-Token', token);
-
-		};
-		
-		
-		
+		  
 		function alterar(){
 			event.preventDefault();
 			
@@ -268,7 +245,7 @@
 					else
 					{
 						var invalid_password = false;
-						var default_url = "http://desenvolvimento.xavante.net.br:82";
+						//var default_url = "http://desenvolvimento.xavante.net.br:82";
 						
 						$.ajax({
 							
@@ -321,7 +298,7 @@
 				{
 					
 					var invalid_password = false;
-					var default_url = "http://desenvolvimento.xavante.net.br:82";
+					//var default_url = "http://desenvolvimento.xavante.net.br:82";
 					
 					$.ajax({
 						

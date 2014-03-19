@@ -141,18 +141,6 @@
            $("input#card-secret-code").mask('999');
 		   $("input#card-data-expiracao").mask('99/99/9999');
 
-  
-	  if ('ajaxPrefilter' in $) 
-		$.ajaxPrefilter(function(options, originalOptions, xhr) { 
-		  options.xhrFields = {
-				withCredentials: true
-			  };
-		  
-		  CSRFProtection(xhr); 
-		});
-	  else 
-		$(document).ajaxSend(function(e, xhr) { CSRFProtection(xhr); });
-		
 		$("div#addcell table tr td img").click(function(){
          //E o campo input ( para adição dos telefones ) ter conteudo maior que 0
          if($("input#phone").val().trim().length > 0){
@@ -211,19 +199,7 @@
 		   }
 	  
 	});
-	
-	
-	
-	
-	
-	function CSRFProtection(xhr) {
-
-	  var token = $('meta[name="csrf-token"]').attr('content');
-	  if (token) 
-		xhr.setRequestHeader('X-CSRF-Token', token);
-
-	}
-  
+	  
 	function cadastrar(){
 		event.preventDefault();
 		
@@ -266,7 +242,7 @@
 			{
 				
 				var invalid_password = false;
-				var default_url = "http://desenvolvimento.xavante.net.br:82";
+				//var default_url = "http://desenvolvimento.xavante.net.br:82";
 				//Li2Json();
 				$('#modal').show();
 				$.ajax({

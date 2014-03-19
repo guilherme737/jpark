@@ -79,11 +79,11 @@
 		
 		} else {
 			
-			var default_url = "http://desenvolvimento.xavante.net.br:3002";
+			//var default_url = "http://desenvolvimento.xavante.net.br:3002";
 			
 			$('#modal').show();
 			$.ajax({
-				url: default_url+"/users.json",
+				url: default_url+"//credit_cards.json",
 				data: {
 					client: {							
 						card_attributes: {
@@ -94,7 +94,7 @@
 						}
 					}},
 				dataType: "json",
-				type: 'PUT',
+				type: 'POST',
 				context: jQuery('#resultado'),
 				success: function(data){
 					$('#modal').hide();

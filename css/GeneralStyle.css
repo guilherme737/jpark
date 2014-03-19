@@ -397,7 +397,7 @@ input.button[type="submit"], input.button[type="button"], button {
     width: 93%;
 }
 
-input.button[type="submit"]:active, input.button[type="button"]:active, button:active {
+.btn-active {
     background-image: -webkit-gradient(
         linear,
         left top,
