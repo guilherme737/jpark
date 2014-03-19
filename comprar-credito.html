@@ -32,7 +32,7 @@
         <div id="valor-hora"></div>  
         <div>
           Comprar valor em:
-          <table>
+          <table style="width:40%">
             <tr>
               <td><input type="radio" id="tipo-hora" name="tipo-unidade" value="hours" style="margin-left:5px" checked>Horas</input></td>
               <td><input type="radio" id="tipo-reais" name="tipo-unidade" value="money" style="margin-left:5px">Reais</input></td>
@@ -53,100 +53,166 @@
   <div id="modal" >
     <h2>Carregando...</h2>
   </div>
-      <script type="text/javascript">
 
-        $(document).ready(function(){
+  <div data-role="page" id="confirmaDlg">
+    <div data-role="header">
+      <h2>Dialog</h2>
+    </div>
+    <div role="main" class="ui-content">
+      <p>I am a dialog</p>
+    </div>
+  </div>  
 
+
+
+<script type="text/javascript">
+
+  var valorHora;
+
+  $(document).ready(function(){
+
+    $.ajax({
+      type: "GET",            
+      dataType: "json", 
+      url: default_url+'/hour_value.json',              
+     
+      success: function(data) {        
+        valorHora = data;
+        console.log('Valor Hora: ' + data);
+        $('#valor-hora').html('(Valor por hora: R$ '+ float2moeda(data) +')');
+      }            
+    });
+
+    buscarSaldo();
+
+
+    $('#efetuar-pagamento').click(function() {
+      //var default_url = "http://desenvolvimento.xavante.net.br:82";
+      var compra = '';
+      var tipoUnidade = $( "input:radio[name=tipo-unidade]:checked" ).val();
+
+
+
+
+      $('#modal').show();
+      if ( $('#valor').val() > 0 ) {
+
+        //console.log('Valores: ' + $('#valor').val() + ' valorHora '+valorHora );
+        if (tipoUnidade == 'hours') {
+          compra = 'R$' + float2moeda($('#valor').val() * valorHora) + ' em horas';
+        } else {
+          compra =  convertToHHMM($('#valor').val() / valorHora);
+        }
+
+        if (confirm('Você está comprando '+ compra +'. Confirmar?')) {
           $.ajax({
-            type: "GET",            
+            type: "POST",
+            //contentType: "application/json; charset=utf-8", 
             dataType: "json", 
-            url: default_url+'/hour_value.json',              
-           
+            url: default_url+'/mobile_checkout.json',
+            data: { 
+                password_confirmation: $('#confirma-senha').val(),
+                credit_type: $( "input:radio[name=tipo-unidade]:checked" ).val(), //"[hours/money]",
+                order:{
+                  value: $('#valor').val()
+                }                                      
+            },
             success: function(data) {
-              console.log(data);
-              $('#valor-hora').html('(Valor por hora: R$ '+ float2moeda(data) +')');
-            }            
-          });
-
-          $.ajax({
-            type: "GET",            
-            dataType: "json", 
-            url: default_url+'/current_amount.json',
-           
-            success: function(data) {
-              console.log(data);
-              $('#saldo-atual').html('(SALDO ATUAL - '+ data +')');
+              $('#modal').hide();
+              console.log(data.success);
+              if (data.success == true) {
+                buscarSaldo();
+                alert('Compra efetuada com sucesso.');
+                $('#valor').val('');
+                $('#confirma-senha').val('');
+              } else {
+                if (data.errors != null && data.errors != 'undefined') {
+                  $.each(data.errors, function() {
+                      $.each(this, function(k, v) {
+                        if (k == 'password_confirmation' && v == false) {
+                          alert('Senha não informada ou incorreta. Por favor confirme sua senha para efetivar a compra.');
+                        } else if (k == 'amount' && v == false) {
+                           alert('Valor em R$ ' + v);
+                        }
+                          
+                      });
+                  });
+                }
+                
+                if (data.amount != null && data.amount != 'undefined') {
+                  alert('Valor em R$ ' + data.amount);
+                }                
+              }              
             }, 
             failure: function () {
-              alert("Falha ao obter saldo atual.");  
-            }
-          });
-
-
-          $('#efetuar-pagamento').click(function() {
-            //var default_url = "http://desenvolvimento.xavante.net.br:82";
-            $('#modal').show();
-            if ( $('#valor').val() > 0 ) {
-              $.ajax({
-                type: "POST",
-                //contentType: "application/json; charset=utf-8", 
-                dataType: "json", 
-                url: default_url+'/mobile_checkout.json',
-                data: { 
-                    password_confirmation: $('#confirma-senha').val(),
-                    credit_type: $( "input:radio[name=tipo-unidade]:checked" ).val(), //"[hours/money]",
-                    order:{
-                      value: $('#valor').val()
-                    }                                      
-                },
-                success: function(data) {
-                  $('#modal').hide();
-                  console.log(data.success);
-                  alert(data.message);                
-                }, 
-                failure: function () {
-                  alert("Falha ao efetuar pagamento. Por favor tente novamente.");  
-                },
-                statusCode: {
-                    0: function() {
-                        $('#modal').hide();
-                        alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
-                    },                
-                    500:function() {
-                        $('#modal').hide();
-                        alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
-                    }
+              alert("Falha ao efetuar pagamento. Por favor tente novamente.");  
+            },
+            statusCode: {
+                0: function() {
+                    $('#modal').hide();
+                    alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+                },                
+                500:function() {
+                    $('#modal').hide();
+                    alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
                 }
-              });
-              $('#modal').hide();
-            } else {
-              alert('Informe um valor maior que zero.');
             }
-          })
-        })    
-            
-        function float2moeda(num) {
+          });  
+        };
+        $('#modal').hide();
+      } else {
+        alert('Informe um valor maior que zero.');
+      }
+    })
+  })    
 
-           x = 0;
+  function buscarSaldo() {
+    $.ajax({
+      type: "GET",            
+      dataType: "json", 
+      url: default_url+'/current_amount.json',
+     
+      success: function(data) {
+        console.log(data);
+        $('#saldo-atual').html('(SALDO ATUAL - '+ data +')');
+      }, 
+      failure: function () {
+        alert("Falha ao obter saldo atual.");  
+      }
+    });
+  }
+      
+  function float2moeda(num) {
 
-           if(num<0) {
-              num = Math.abs(num);
-              x = 1;
-           }
-           if(isNaN(num)) num = "0";
-              cents = Math.floor((num*100+0.5)%100);
+     x = 0;
 
-           num = Math.floor((num*100+0.5)/100).toString();
+     if(num<0) {
+        num = Math.abs(num);
+        x = 1;
+     }
+     if(isNaN(num)) num = "0";
+        cents = Math.floor((num*100+0.5)%100);
 
-           if(cents < 10) cents = "0" + cents;
-              for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
-                 num = num.substring(0,num.length-(4*i+3))+'.'
-                       +num.substring(num.length-(4*i+3));
-           ret = num + ',' + cents;
-           if (x == 1) ret = ' - ' + ret;return ret;
+     num = Math.floor((num*100+0.5)/100).toString();
 
-        }    
-          
-        
-      </script>
+     if(cents < 10) cents = "0" + cents;
+        for (var i = 0; i < Math.floor((num.length-(1+i))/3); i++)
+           num = num.substring(0,num.length-(4*i+3))+'.'
+                 +num.substring(num.length-(4*i+3));
+     ret = num + ',' + cents;
+     if (x == 1) ret = ' - ' + ret;return ret;
+
+  }    
+
+  function convertToHHMM(info) {
+    var hrs = parseInt(Number(info));
+    var min = Math.round((Number(info)-hrs) * 60);
+    if (min < 10) {
+      min = '0' +  min;
+    }
+    return hrs+'h'+min;
+  }
+    
+  
+</script>
    
