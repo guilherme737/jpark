@@ -96,15 +96,20 @@
 
       
     });
+	
+	$(document).on("vclick", '#sair', sair);
 
-	$('#sair').click(function() { 
+	function sair() { 
 		$.ajax({
 			type: "DELETE",
 			dataType: "json", 
 			url: default_url+'/users/sign_out',       
 			success: function(data) {
 				$.mobile.navigate("#credencial");
-			}	
+			},
+			complete: function(data) {
+				$.mobile.navigate("#credencial");			
+			}			
 		})
-	})	
+	}	
   </script>

@@ -68,6 +68,7 @@
             //var default_url = "http://desenvolvimento.xavante.net.br:82";
 
             if ( $('#vaga').val() > 0 ) {
+			  $('#modal').show();	
               $.ajax({
                 type: "POST",
                 //contentType: "application/json; charset=utf-8", 
@@ -80,11 +81,26 @@
                 }, 
                 failure: function () {
                   alert("Falha ao efetuar o checkin para essa vaga.");  
-                }
+                },
+				statusCode: {
+					200: function() {
+						$('#modal').hide();
+						alert('Checkin efetuado com sucesso.');
+						$('#vaga').val('');
+					},
+					0: function() {
+						$('#modal').hide();
+						alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+					},                
+					500:function() {
+						$('#modal').hide();
+						alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
+					}
+				}
               });
             } else {
               alert('Informe a vaga que deseja estacionar.');
-            }
+            } 
             
             /*  
             $.post(default_url+'/validations.json', 
