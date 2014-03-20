@@ -91,11 +91,20 @@
 					})
 					.bind("touchend", function() {
 						$(this).removeClass("btn-active");
-					});
+					})
 					.bind("touchcancel", function() {
 						// sometimes Android fires a touchcancel event rather than a touchend. Handle this too.
 						$(this).removeClass("btn-active");
 					});
+
+                /*    
+                x$('input.button[type="submit"], input.button[type="button"], button').on('touchstart', function(e) { 
+                    x$(e.currentTarget).addClass('btn-active'); 
+                }); 
+                x$('input.button[type="submit"], input.button[type="button"], button').on('touchend', function(e) { 
+                    x$(e.currentTarget).removeClass('btn-active'); 
+                });    
+                */
 
             });
 

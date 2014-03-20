@@ -20,22 +20,37 @@
 		        </tr>
 		        <tr>
 		           <td>
+						<select id="card-flag" class="bandeira-select">
+							<option value="">Selecione a bandeira</option>
+							<option value="visa">Visa</option>
+							<option value="master">Master Card</option>
+							<option value="amex">American Express</option>
+							<option value="elo">Elo</option>
+							<option value="dinners">Dinners</option>
+						</select>	
+					</td>
+		        </tr>
+		        <tr>
+		           <td colspan="2">
 						<input placeholder="Número" id="card-number" name="client[card_attributes][number]" size="30" type="text" />
 					</td>
 		        </tr>
 		        <tr>
-		           <td>
+		           <td colspan="2">
 						<input placeholder="Código de segurança" id="card-cvv" name="client[card_attributes][cvv]" size="30" type="text" />
 		            </td>
 		        </tr>
 		        <tr>
-		           <td>
-						<input placeholder="Nome no cartão" id="card-name" name="client[card_attributes][name]" size="30" type="text" />
+		           <td colspan="2">
+						<input placeholder="Nome no cartão" id="card-name" size="30" type="text" />
 		            </td>
 		        </tr>
 		        <tr>
 		           <td>
-						<input placeholder="Data da expiração" id="card-data-expiracao" name="client[card_attributes][expiration_date]" size="30" type="text" />
+						<input placeholder="Mes (mm)" id="card-month" size="15" type="text" style="width:35%"/>
+		           </td>
+		           <td>						
+						<input placeholder="Ano (aa)" id="card-year" size="15" type="text" style="width:35%"/>
 		           </td>
 		        </tr>
 	        </table>
@@ -43,7 +58,7 @@
         
          <div align="center">
             <!--<a href="#" class="button" id="cadastrar" style="display:none">Cadastrar</a>-->
-            <input type="button" value="Cadastrar" class="button" id="submit"  onclick="cadastrarCartao()" style="margin-bottom:7%;margin-top:7% !important"/>
+            <button type="button" class="button" id="submit"  onclick="cadastrarCartao()" style="margin-bottom:7%;margin-top:7% !important">Cadastrar</button>
          </div>
    </div>
    </form>
@@ -62,8 +77,8 @@
 	 $(document).ready(function(){
 		
 	   //Definindo as mascaras
-       $("input#card-month").mask('00');
-       $("input#card-year").mask('00');
+       $("input#card-month").mask('99');
+       $("input#card-year").mask('99');
        
 	});
 	
@@ -84,6 +99,7 @@
 			$('#modal').show();
 			$.ajax({
 				url: default_url+"//credit_cards.json",
+				/*
 				data: {
 					client: {							
 						card_attributes: {
@@ -93,6 +109,19 @@
 							card_number: 				$("#card-number").val()
 						}
 					}},
+				*/
+				data: {
+					"credit_card":{
+						"card_holder": $("#card-name").val(),
+						"card_number": $("#card-number").val(),
+						"card_alias": $("#card-cvv").val(),
+						"flag": $("#card-flag").val(),//master, amex, elo, visa ou diners
+						"card_expiration": {
+							"month": "11",
+							"year": "2014"
+						}
+					}
+				},	
 				dataType: "json",
 				type: 'POST',
 				context: jQuery('#resultado'),

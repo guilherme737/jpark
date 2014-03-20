@@ -398,6 +398,8 @@ input.button[type="submit"], input.button[type="button"], button {
 }
 
 .btn-active {
+    background-color: #A62B40 !important;
+    /*
     background-image: -webkit-gradient(
         linear,
         left top,
@@ -410,6 +412,7 @@ input.button[type="submit"], input.button[type="button"], button {
     background-image: -webkit-linear-gradient(bottom, #C42747 25%, #A62B3F 100%);
     background-image: -ms-linear-gradient(bottom, #C42747 25%, #A62B3F 100%);
     background-image: linear-gradient(to bottom, #C42747 25%, #A62B3F 100%);
+    */
 }
 
 
@@ -681,3 +684,14 @@ div.checkin input[type="button"].pagar-saldo, input[type="button"].pagar-cartao 
 input {
     -webkit-user-select: auto !important;
 }   
+
+.bandeira-select {
+    background: url("../imagens/24/select-down24.png") no-repeat scroll right center #1C1C24;    
+    border-radius: 2px;
+    color: rgb(169,169,169);
+    font-size: 1.3rem;
+    border: none;
+    padding: 12px 11px 10px 13px !important;
+    width: 100%;
+    
+}
