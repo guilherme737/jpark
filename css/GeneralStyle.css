@@ -398,7 +398,7 @@ input.button[type="submit"], input.button[type="button"], button {
 }
 
 .btn-active {
-    background-color: #A62B40 !important;
+    background-color: #c3c3c3 !important;
     /*
     background-image: -webkit-gradient(
         linear,
