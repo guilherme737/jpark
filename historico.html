@@ -28,7 +28,7 @@
         
         $.ajax({
           beforeSend: function () {
-            $('#modal').show();
+            //$('#modal').show();
           },
           type: "GET",
           url: default_url+'/validations.json',
@@ -51,13 +51,12 @@
               );
             }
             $('#history-table #history_list tr:nth-child(1)').remove();
+            $('#modal').hide();
           },
           failure: function () {
             console.log("Falhou");
+            $('#modal').hide();
           }
         });
       })
-    </script>
-  <div id="modal" >
-    <h2>Carregando...</h2>
-  </div>
+    </script>  

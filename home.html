@@ -33,6 +33,13 @@
             <img src="imagens/24/user24.png"/>DADOS CADASTRO - Clique para editar
           </a>
         </td>
+      </tr>
+      <tr>
+        <td>
+          <a href="" id="teste" class="link-buttons">
+            <img src="imagens/24/user24.png"/>TESTE 
+          </a>
+        </td>
       </tr>      
    </table>
   </div>
@@ -45,9 +52,21 @@
     </div>
   </div>
   <script type="text/javascript">
-    $('#menu-historico').click(function() {      
+
+    $(document).on("click", "#teste", function() {
+        
+      $.mobile.loading( 'show', {
+          text: 'Carregando',
+          textVisible: false,
+          theme: 'a',
+          textonly: false,
+          html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+      });
+    });
+
+    $('#menu-historico').click(function() {       
       $('#historico').load('historico.html', function() {
-        $.mobile.navigate("#historico");
+        $.mobile.navigate("#historico");     
       });
     });
 

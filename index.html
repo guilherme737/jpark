@@ -38,7 +38,11 @@
             <div data-role="page" id="comprar-credito"></div>
             <div data-role="page" id="cadastro-cartao"></div>
         </div> 
-        
+        <!--
+        <div id="modal" >
+            <h2>Carregando...</h2>
+        </div>
+        -->
         <script type="text/javascript">
             var default_url = "http://expark.com.br"; //"http://desenvolvimento.xavante.net.br:3002";
             
@@ -58,10 +62,22 @@
                     });
                 }
 
-
-                $(document).on("pagebeforechange", function(e, data) {
+                $(document).on("pagebeforechange", function(e, data) {                    
                     console.log('Verifica usuário: ' + data.toPage);
 
+                    //INICIA O LOADER    
+                    var interval = setInterval(function(){
+                        $.mobile.loading( 'show', {
+                              text: 'Carregando',
+                              textVisible: false,
+                              theme: 'a',
+                              textonly: false,
+                              html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+                          });
+                        clearInterval(interval);
+                    },1);
+
+                    
                     if (typeof data.toPage === "string") {
                         var credencial = "#credencial";
                         var cadastroNovo = "#cadastro-novo";
@@ -74,9 +90,18 @@
                                 $.mobile.navigate("#credencial");
                             }
                         });
-                    }
-                });
+                    } 
 
+                });
+                
+                //REMOVE LOADER
+                $(document).on('pageshow', function(){  
+                    var interval = setInterval(function(){
+                        $.mobile.loading('hide');
+                        clearInterval(interval);
+                    },1);      
+                });
+                
                 $('#credencial').load('login.html');
                 $('#home').load('home.html');
                 //$('#home').load('home.html');    
