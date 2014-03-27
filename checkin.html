@@ -112,8 +112,23 @@
             */
           });    
 
-          $('#pagar-cartao').click(function() {
-            alert("Funcionalidade ainda não disponível");
+          $('#pagar-cartao').click(function() {            
+			$.ajax({
+				type: "POST",            
+				dataType: "json", 
+				url: default_url+'/pre_authorize',           
+				success: function(data) {              
+				  if (data.success) {
+					alert("Pagamento autorizado com sucesso.");  
+				  }
+				 
+				}, 
+				failure: function () {
+				  alert("Falha ao efetuar pagamento. Tente novamente.");  
+				}
+			});
+			
+			
           }); 
           
           $('#comprar-credito').click(function() {

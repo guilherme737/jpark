@@ -50,20 +50,6 @@
       </div>
       <br/><br/>
   </div>
-  <div id="modal" >
-    <h2>Carregando...</h2>
-  </div>
-
-  <div data-role="page" id="confirmaDlg">
-    <div data-role="header">
-      <h2>Dialog</h2>
-    </div>
-    <div role="main" class="ui-content">
-      <p>I am a dialog</p>
-    </div>
-  </div>  
-
-
 
 <script type="text/javascript">
 
@@ -95,10 +81,14 @@
       var compra = '';
       var tipoUnidade = $( "input:radio[name=tipo-unidade]:checked" ).val();
 
-
-
-
-      $('#modal').show();
+      $.mobile.loading( 'show', {
+          text: 'Carregando',
+          textVisible: false,
+          theme: 'a',
+          textonly: false,
+          html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+      });	  
+	  
       if ( $('#valor').val() > 0 ) {
 
         //console.log('Valores: ' + $('#valor').val() + ' valorHora '+valorHora );
@@ -122,7 +112,7 @@
                 }                                      
             },
             success: function(data) {
-              $('#modal').hide();
+              $.mobile.loading( 'hide');
               console.log(data.success);
               if (data.success == true) {
                 buscarSaldo();
@@ -163,9 +153,10 @@
             }
           });  
         };
-        $('#modal').hide();
+        //$.mobile.loading( 'hide');
       } else {
         alert('Informe um valor maior que zero.');
+		$.mobile.loading( 'hide');
       }
     })
   })    
