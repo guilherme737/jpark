@@ -113,20 +113,21 @@
           });    
 
           $('#pagar-cartao').click(function() {            
-			$.ajax({
-				type: "POST",            
-				dataType: "json", 
-				url: default_url+'/pre_authorize',           
-				success: function(data) {              
-				  if (data.success) {
-					alert("Pagamento autorizado com sucesso.");  
-				  }
-				 
-				}, 
-				failure: function () {
-				  alert("Falha ao efetuar pagamento. Tente novamente.");  
-				}
-			});
+      			$.ajax({
+      				type: "POST",            
+      				dataType: "json", 
+      				url: default_url+'/pre_authorize.json',
+              data: {validation: {id_parking_space: $('#vaga').val()}},
+      				success: function(data) {              
+      				  if (data.success) {
+      					alert("Pagamento autorizado com sucesso.");  
+      				  }
+      				 
+      				}, 
+      				failure: function () {
+      				  alert("Falha ao efetuar pagamento. Tente novamente.");  
+      				}
+      		});
 			
 			
           }); 
