@@ -250,7 +250,7 @@ div.content input[type="text"] {
 input[type="checkbox"] {
     display: none;
 }
-input[type="checkbox"] + label span {
+input[type="checkbox"] + label span, .ui-checkbox-off span {
     background: url("../imagens/check_radio_sheet.png") no-repeat scroll left top rgba(0, 0, 0, 0);
     cursor: pointer;
     display: inline-block;
@@ -259,9 +259,10 @@ input[type="checkbox"] + label span {
     vertical-align: middle;
     width: 19px;
 }
-input[type="checkbox"]:checked + label span {
+input[type="checkbox"]:checked + label span, .ui-checkbox-on span {
     background: url("../imagens/check_radio_sheet.png") no-repeat scroll -19px top rgba(0, 0, 0, 0);
 }
+
 label {
     color: #CCCCCC;
     cursor: pointer;

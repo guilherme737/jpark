@@ -66,9 +66,16 @@
 
           $('#pagar-saldo').click(function() {
             //var default_url = "http://desenvolvimento.xavante.net.br:82";
+            $.mobile.loading( 'show', {
+                text: 'Carregando',
+                textVisible: false,
+                theme: 'a',
+                textonly: false,
+                html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+            }); 
 
             if ( $('#vaga').val() > 0 ) {
-			  $('#modal').show();	
+			       
               $.ajax({
                 type: "POST",
                 //contentType: "application/json; charset=utf-8", 
@@ -76,29 +83,31 @@
                 url: default_url+'/validations.json',              
                 data: {validation: {id_parking_space: $('#vaga').val()}},
                 success: function(data) {
-                  console.log(data);
+                  $.mobile.loading( 'hide');
                   alert(data.message);                
                 }, 
                 failure: function () {
+                  $.mobile.loading( 'hide');
                   alert("Falha ao efetuar o checkin para essa vaga.");  
                 },
-				statusCode: {
-					200: function() {
-						$('#modal').hide();
-						alert('Checkin efetuado com sucesso.');
-						$('#vaga').val('');
-					},
-					0: function() {
-						$('#modal').hide();
-						alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
-					},                
-					500:function() {
-						$('#modal').hide();
-						alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
-					}
-				}
+        				statusCode: {
+        					200: function() {
+        						$.mobile.loading( 'hide');
+        						alert('Checkin efetuado com sucesso.');
+        						$('#vaga').val('');
+        					},
+        					0: function() {
+        						$.mobile.loading( 'hide');
+        						alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+        					},                
+        					500:function() {
+        						$.mobile.loading( 'hide');
+        						alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
+        					}
+        				}
               });
             } else {
+              $.mobile.loading( 'hide');
               alert('Informe a vaga que deseja estacionar.');
             } 
             
@@ -112,24 +121,58 @@
             */
           });    
 
-          $('#pagar-cartao').click(function() {            
-      			$.ajax({
-      				type: "POST",            
-      				dataType: "json", 
-      				url: default_url+'/pre_authorize.json',
-              data: {validation: {id_parking_space: $('#vaga').val()}},
-      				success: function(data) {              
-      				  if (data.success) {
-      					alert("Pagamento autorizado com sucesso.");  
-      				  }
-      				 
-      				}, 
-      				failure: function () {
-      				  alert("Falha ao efetuar pagamento. Tente novamente.");  
-      				}
-      		});
-			
-			
+          $('#pagar-cartao').click(function() {    
+            $.mobile.loading( 'show', {
+                text: 'Carregando',
+                textVisible: false,
+                theme: 'a',
+                textonly: false,
+                html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+            });
+
+            $.ajax({
+              type: "GET",            
+              dataType: "json", 
+              url: default_url+'/credit_cards.json',
+             
+              success: function(data) {
+                if (data != null) {   
+                  //PROSSEGUE A COMPRA               
+                  $.ajax({
+                    type: "POST",            
+                    dataType: "json", 
+                    url: default_url+'/pre_authorize.json',
+                    data: {validation: {id_parking_space: $('#vaga').val()}},
+                    success: function(data) {              
+                      if (data.success) {
+                        $.mobile.loading( 'hide'); 
+                        alert("Pagamento autorizado com sucesso.");  
+                      } else {
+                        alert(data.errors);
+                        $.mobile.loading( 'hide'); 
+                      }
+
+                    }, 
+                    failure: function () {
+                      $.mobile.loading( 'hide');
+                      alert("Falha ao efetuar pagamento. Tente novamente.");  
+                    }
+                  }); 
+                } else {
+                  //NÃO TEM CARTÃO CADASTRADO. CADASTRAR!
+                  $('#cadastro-cartao-checkin').load('cadastro-cartao-checkin.html', function() {     
+                    $.mobile.changePage( "#cadastro-cartao-checkin", { role: "dialog" } );
+                  }); 
+                }
+                
+              }, 
+              failure: function () {
+                //alert("Falha ao obter saldo atual.");  
+              }
+            });  
+
+
+      				
           }); 
           
           $('#comprar-credito').click(function() {

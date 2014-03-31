@@ -101,17 +101,15 @@
            </ul>
         </div>
        
-	   <input type="checkbox" id="c2" value=0 name="cc" /><label for="c2">
-		
-         <!-- end: div of credit card -->
-         <div id="terms" align="center">
-            
+     <div id="terms" align="center">            
+	   <input type="checkbox" id="c2" value=0 name="cc" />
+	   	<label for="c2">
             <span tabindex="12"></span>Li e concordo com o Termo de Uso<br/>
-            e Adesão de Compra</label>
-         </div>
-         <div align="center">
-            <a href="#" class="button" id="cadastrar" style="display:none">Cadastrar</a>
-            <input type="button" value="Cadastrar" class="button" id="submit"  onclick="cadastrar()" style="margin-bottom:7%;margin-top:7% !important"/>
+            e Adesão de Compra
+        </label>
+     </div>
+         <div align="center">            
+            <button type="button" value="Cadastrar" class="button" id="submit"  onclick="cadastrar()" style="margin-bottom:7%;margin-top:7% !important">Cadastrar</button>
          </div>
    </div>
    </form>
@@ -139,7 +137,7 @@
            $("input#card-month").mask('99');
            $("input#card-year").mask('9999');
            $("input#card-secret-code").mask('999');
-		   $("input#card-data-expiracao").mask('99/99/9999');
+		   $("input#card-data-expiracao").mask('99/99');
 
 		$("div#addcell table tr td img").click(function(){
          //E o campo input ( para adição dos telefones ) ter conteudo maior que 0
@@ -201,11 +199,10 @@
 	});
 	  
 	function cadastrar(){
-		event.preventDefault();
+		//event.preventDefault();
 		
 		var items = [];
-	
-		
+			
 		$('ul#addedphones li span#phone').each(function() {
            var $this = $(this);
            var item = {phone: $this.html()};
@@ -259,10 +256,10 @@
 							}, 
 							phones_attributes: items,
 							card_attributes: {
-								card_alias: 				$("#card-cvv").val(), 
-								card_expiration: 			$("#card-data-expiracao").val(),
-								custome_holder: 			$("#card-name").val(),
-								card_number: 				$("#card-number").val()
+								card_alias: 			$("#card-cvv").val(), 
+								card_expiration: 		$("#card-data-expiracao").val(),
+								customer_name: 			$("#card-name").val(),
+								card_number: 			$("#card-number").val()
 							}
 						}},
 					dataType: "json",
@@ -342,15 +339,4 @@
 		}
       </style>
   
-  <div class="modal" align="center">
-      <div class="title">
-         <span id="line"></span>
-         <div class="loader">
-            <span></span>
-         </div>
-      </div>
-   </div>
    
-  <div id="modal" >
-    <h2>Carregando...</h2>
-  </div>

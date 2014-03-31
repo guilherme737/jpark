@@ -61,17 +61,8 @@
             <button type="button" class="button" id="submit"  onclick="cadastrarCartao()" style="margin-bottom:7%;margin-top:7% !important">Cadastrar</button>
          </div>
    </div>
-   </form>
-   
-   </div>
-   <div class="modal" align="center">
-      <div class="title">
-         <span id="line"></span>
-         <div class="loader">
-            <span></span>
-         </div>
-      </div>
-   </div>
+   </form>   
+   </div>   
   </div>
   <script>
 	 $(document).ready(function(){
@@ -81,7 +72,6 @@
        $("input#card-year").mask('99');
        
 	});
-	
   
 	function cadastrarCartao() {
 		//event.preventDefault();
@@ -115,12 +105,12 @@
 				type: 'POST',
 				context: jQuery('#resultado'),
 				success: function(data){
-					$('#modal').hide();
+					//$('#modal').hide();
 					if(data.name == $("#nome").val()) {
 						alert("Cartão cadastrado com sucesso.");
-						$('#comprar-credito').load('comprar-credito.html', function() {
-			              $.mobile.navigate("#comprar-credito");
-			            });
+						//close modal
+						$('#cadastro-cartao-checkin').dialog( "close" );
+
 					}                
 				}
 			});
