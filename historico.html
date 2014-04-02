@@ -28,7 +28,13 @@
         
         $.ajax({
           beforeSend: function () {
-            //$('#modal').show();
+            $.mobile.loading( 'show', {
+                text: 'Carregando',
+                textVisible: false,
+                theme: 'a',
+                textonly: false,
+                html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+            });
           },
           type: "GET",
           url: default_url+'/validations.json',
@@ -36,8 +42,8 @@
             dataType: "json", 
             crossDomain: true,
           success: function(data) {
-            console.log("Sucesso ---> " );
-            $('#modal').hide();
+            console.log("Sucesso Historico" );
+             $.mobile.loading('hide');
             for($i=0; $i < data.length; $i++){
               //console.log("Vaga" + data[$i].vacancy);
               //console.log("Método" + data[$i].method);
@@ -51,11 +57,11 @@
               );
             }
             $('#history-table #history_list tr:nth-child(1)').remove();
-            $('#modal').hide();
+             $.mobile.loading('hide');
           },
           failure: function () {
             console.log("Falhou");
-            $('#modal').hide();
+             $.mobile.loading('hide');
           }
         });
       })
