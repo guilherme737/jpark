@@ -663,7 +663,7 @@ tr#table-header {
     background: none repeat scroll 0 0 rgba(100, 100, 100, 0.6);
     color: #FFFFFF;
     height: 100%;
-    position: absolute;
+    position: fixed; /*absolute;*/
     top: 0;
     width: 100%;
     /*display: none;*/
