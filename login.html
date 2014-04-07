@@ -66,6 +66,10 @@
 
 <script type="text/javascript">
 
+    $(document).ready(function() {
+        $.mobile.loading('hide');
+    });
+
     $(document).on("vclick", "#menu-cadastro-novo", function() {
         $('#cadastro-novo').load('cadastro-novo.html', function() {
             $.mobile.navigate("#cadastro-novo");

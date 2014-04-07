@@ -90,6 +90,7 @@
                                     && u.hash.search(credencial) === -1
                                     && u.hash.search(cadastroNovo) === -1) {
                                 $.mobile.navigate("#credencial");
+                                $.mobile.loading('hide');
                             }
                         });
                     } 
@@ -137,6 +138,7 @@
                 if (token)
                     xhr.setRequestHeader('X-CSRF-Token', token);
             }
+
 
         </script> 
     </body>

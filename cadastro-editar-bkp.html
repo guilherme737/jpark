@@ -54,6 +54,29 @@
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>				
+				<tr>
+		            <td colspan="2"><strong><font color="white">Dados do cartão de crédito</font><strong></td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Número" id="card-number" name="client[card_attributes][number]" size="30" type="text" />
+					</td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Código de segurança" id="card-cvv" name="client[card_attributes][cvv]" size="30" type="text" />
+		            </td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Nome no cartão" id="card-name" name="client[card_attributes][name]" size="30" type="text" />
+		            </td>
+		        </tr>
+		        <tr>
+		           <td>
+						<input placeholder="Data da expiração" id="card-data-expiracao" name="client[card_attributes][expiration_date]" size="30" type="text" />
+		           </td>
+		        </tr>
 		    </table>
 			<!-- begin: div of phones -->
 	        <div id="addcell" align="center">
@@ -95,7 +118,12 @@
 	$(document).ready(function(){
 		$("input#cellphone").mask('(99) 9999-9999');
         $("input#phone").mask('(99) 9999-9999');
-		$("input#telefone").mask('(99) 9999-9999');        
+		$("input#telefone").mask('(99) 9999-9999');
+        $("input#card-number").mask('9999 9999 9999 9999');
+        $("input#card-month").mask('99');
+        $("input#card-year").mask('9999');
+        $("input#card-secret-code").mask('999');
+		$("input#card-data-expiracao").mask('99/99');
 		
 		$.ajax({
           	type: "GET",		  
@@ -111,7 +139,13 @@
 	            $('#nome').val(data.user_info.name);
 				$('#telefone').val(data.user_info.telefone);
 				$('#email').val(data.email);
-				$('#loginuser').val(data.login);				
+				$('#loginuser').val(data.login);
+					 
+				//Aqui irá colocar os dados para preencher o cartão de crédito
+				// $('#card-number').val(data.);
+				// $('#card-cvv').val(data.);
+				// $('#card-name').val(data.);
+				// $('#card-data-expiracao').val(data.);
           	},
           	failure: function () {
             	console.log("Falhou");
@@ -164,19 +198,24 @@
 				($("#senha").val() != '' && $("#senha").val() == $("#retype-senha").val())
 			) {
 				$.ajax({						
-					url: default_url+"/mobile/user.json",						
-					data: {						
-						current_password: senhaAtual,
-						client:{							
-							name: $("#nome").val(),
-							telefone: $("#telefone").val(),
-							phones_attributes: items,
-							
-							user_attributes: {
-								login: $("#loginuser").val(),
-								email: $("#email").val(),									
-								password: $("#senha").val(),
-								password_confirmation: $("#retype-senha").val(),
+					url: default_url+"/users.json",						
+					data: {
+						user:{
+							login: $("#loginuser").val(),
+							email: $("#email").val(),
+							password: $("#senha").val(),
+							password_confirmation: $("#retype-senha").val(),
+							current_password: senhaAtual,
+							user_info_attributes: {
+								name: $("#nome").val(),
+								telefone: $("#telefone").val(),
+							},
+							phone_atributes: items,
+							card_attributes:{
+								card_alias: 				$("#card-cvv").val(), 
+								card_expiration: 			$("#card-data-expiracao").val(),
+								customer_name: 				$("#card-name").val(),
+								card_number: 				$("#card-number").val()
 							}
 						}
 					},
@@ -184,51 +223,20 @@
 					type: 'PUT',
 					//context: jQuery('#resultado'),
 					success: function(data){
-						if (data == null || data == 'undefined') {	
-							alert('Cadastro realizado com sucesso');
-
-							if ( $("#senha").val() != '' ) {
-		                		$.ajax({
-									type: "DELETE",
-									dataType: "json", 
-									url: default_url+'/users/sign_out',       
-									success: function(data) {
-										$.mobile.navigate("#credencial");
-									},
-									complete: function(data) {
-										$.mobile.navigate("#credencial");			
-									}			
-								});
-		                	}						
+						if(data) {	
+							alert('Cadastro realizado com sucesso');							
 						} else {
-							alert('Erro ao efetuar o cadastro. Por favor confira os dados e tente novamente.');
+							alert('ERRO: Não foi possivel efetuar o cadastro');
 						}
 					},
 					failure: function () {
-		              	//alert("Falha ao efetuar a alteração. Por favor tente novamente.");  
+		              	alert("Falha ao efetuar a alteração. Por favor tente novamente.");  
 		            },
 		            statusCode: {
-		                0:function() {
+		                0: function() {
 		                    //$('#modal').hide();
 		                    alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
-		                },          
-		                200:function() {
-		                	alert('Cadastro realizado com sucesso');
-		                	
-		                	if ( $("#senha").val() != '' ) {
-		                		$.ajax({
-									type: "DELETE",
-									dataType: "json", 
-									url: default_url+'/users/sign_out',       
-									success: function(data) {
-										$.mobile.navigate("#credencial");
-									},
-									complete: function(data) {
-										$.mobile.navigate("#credencial");			
-									}			
-								});
-		                	}
-		                },      
+		                },                
 		                500:function() {
 		                    //$('#modal').hide();
 		                    alert('Erro ao acessar o servidor. Por favor tente novamente em alguns minutos.');
