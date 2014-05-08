@@ -1,6 +1,6 @@
    <div id="container">
     <div class="header">
-      <a href="#home"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
+      <a href="" onclick="window.history.back();"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
         <h1> Cadastro </h1>
    </div>
    <div class="body-container">
@@ -84,7 +84,6 @@
 	
   
 	function cadastrarCartao() {
-		//event.preventDefault();
 		
 		if (	$("#card-cvv").val() 		== ''
 			||  $("#card-data-expiracao")	== ''
@@ -94,10 +93,17 @@
 		
 		} else {
 			
-			//var default_url = "http://desenvolvimento.xavante.net.br:3002";
-			
 			//$('#modal').show();
 			$.ajax({
+				beforeSend: function () {
+		            $.mobile.loading( 'show', {
+		                text: 'Carregando',
+		                textVisible: false,
+		                theme: 'a',
+		                textonly: false,
+		                html: '<div id="modal-2" ><h2>Carregando...</h2></div>'
+		            });
+		        },
 				url: default_url+"//credit_cards.json",			
 				data: {
 					"credit_card":{
@@ -113,15 +119,20 @@
 				},	
 				dataType: "json",
 				type: 'POST',
-				context: jQuery('#resultado'),
-				success: function(data){
-					$('#modal').hide();
+				//context: jQuery('#resultado'),
+				success: function(data){					
 					if(data.name == $("#nome").val()) {
 						alert("Cartão cadastrado com sucesso.");
 						$('#comprar-credito').load('comprar-credito.html', function() {
+						  $.mobile.loading('hide');	
 			              $.mobile.navigate("#comprar-credito");
 			            });
-					}                
+					} else {
+						$.mobile.loading('hide');
+					} 
+				},
+				complete: function () {
+					$.mobile.loading('hide');
 				}
 			});
 		}

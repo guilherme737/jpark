@@ -3,7 +3,7 @@
     
   </style>
   <div class="header">
-    <a href="" id="voltar-comprar-credito"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
+    <a href="" onclick="window.history.back();"><img src="imagens/voltar.png" height="16" width="16"/> Voltar</a>
     <h1> Comprar cr&eacute;dito </h1>
   </div>
   <div class="content checkin" align="center" style="color:#ffffff">
@@ -72,11 +72,6 @@
     });
 
     buscarSaldo();
-
-    $('#voltar-comprar-credito').click(function() {
-       //$.mobile.navigate("#home");
-       window.history.back();
-    })
 
     $('#teste2').click(function() {
       $.mobile.loading( 'show', {
