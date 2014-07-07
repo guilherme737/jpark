@@ -43,9 +43,8 @@
         <div style="margin-top:5px;">Confirme sua SENHA e efetive sua compra.</div>  
         <table>      
           <tr>
-            <td style="width:50%"><input type="password" id="confirma-senha" name="confirma-senha" style="font-size:1em !important; width:48%;"></td>
-            <td><button id="efetuar-pagamento" type="button" class="button pagar-cartao">Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito</button>
-            <button id="teste2" type="button" class="button pagar-cartao">TESTE</button>
+            <td style="width:50%"><input type="password" id="confirma-senha" name="confirma-senha" style="font-size:1em !important; width:48%;" placeholder='SENHA'></td>
+            <td><button id="efetuar-pagamento" type="button" class="button pagar-cartao">Pagar com cart&atilde;o &#13;&#10; de cr&eacute;dito</button>            
             </td>          
           </tr>
         </table>       
@@ -124,8 +123,8 @@
               $.mobile.loading( 'hide');
               console.log(data.success);
               if (data.success == true) {
-                buscarSaldo();
-                alert('Compra efetuada com sucesso.');
+                buscarSaldo();                
+                navigator.notification.alert('Compra efetuada com sucesso.', function(){}, "Confirmação");
                 $('#valor').val('');
                 $('#confirma-senha').val('');
               } else {
@@ -133,9 +132,10 @@
                   $.each(data.errors, function() {
                       $.each(this, function(k, v) {
                         if (k == 'password_confirmation' && v == false) {
-                          alert('Senha não informada ou incorreta. Por favor confirme sua senha para efetivar a compra.');
+                          navigator.notification.alert('Senha não informada ou incorreta. Por favor confirme sua senha para efetivar a compra.', function(){}, "Erro");
+
                         } else if (k == 'amount' && v == false) {
-                           alert('Valor em R$ ' + v);
+                           navigator.notification.alert('Valor em R$ ' + v, function(){}, "Confirmação");
                         }
                           
                       });
@@ -143,28 +143,28 @@
                 }
                 
                 if (data.amount != null && data.amount != 'undefined') {
-                  alert('Valor em R$ ' + data.amount);
+                  navigator.notification.alert('Valor em R$ ' + data.amount, function(){}, "Confirmação");
                 }                
               }              
             }, 
             failure: function () {
-              alert("Falha ao efetuar pagamento. Por favor tente novamente.");  
+              navigator.notification.alert("Falha ao efetuar pagamento. Por favor tente novamente.", function(){}, "Erro");  
             },
             statusCode: {
                 0: function() {
                     $('#modal').hide();
-                    alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+                    navigator.notification.alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.', function(){}, "Erro");
                 },                
                 500:function() {
                     $('#modal').hide();
-                    alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
+                    navigator.notification.alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.', function(){}, "Erro");
                 }
             }
           });  
         };
         //$.mobile.loading( 'hide');
       } else {
-        alert('Informe um valor maior que zero.');
+        navigator.notification.alert('Informe um valor maior que zero.', function(){}, "Erro");
 		    $.mobile.loading( 'hide');
       }
     })
@@ -181,7 +181,7 @@
         $('#saldo-atual').html('(SALDO ATUAL - '+ data +')');
       }, 
       failure: function () {
-        alert("Falha ao obter saldo atual.");  
+        navigator.notification.alert("Falha ao obter saldo atual.", function(){}, "Erro");  
       }
     });
   }

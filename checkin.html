@@ -60,7 +60,7 @@
               $('#saldo').html(data);
             }, 
             failure: function () {
-              alert("Falha ao obter saldo atual.");  
+              navigator.notification.alert("Falha ao obter saldo atual.", function(){}, "Erro");  
             }
           });	
 
@@ -84,31 +84,31 @@
                 data: {validation: {id_parking_space: $('#vaga').val()}},
                 success: function(data) {
                   $.mobile.loading( 'hide');
-                  alert(data.message);                
+                  navigator.notification.alert(data.message, function(){}, "Confirmação");                
                 }, 
                 failure: function () {
                   $.mobile.loading( 'hide');
-                  alert("Falha ao efetuar o checkin para essa vaga.");  
+                  navigator.notification.alert("Falha ao efetuar o checkin para essa vaga.", function(){}, "Erro");  
                 },
         				statusCode: {
         					200: function() {
         						$.mobile.loading( 'hide');
-        						alert('Checkin efetuado com sucesso.');
+        						navigator.notification.alert('Checkin efetuado com sucesso.', function(){}, "Confirmação");
         						$('#vaga').val('');
         					},
         					0: function() {
         						$.mobile.loading( 'hide');
-        						alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+        						navigator.notification.alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.', function(){}, "Erro");
         					},                
         					500:function() {
         						$.mobile.loading( 'hide');
-        						alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.');
+        						navigator.notification.alert('Erro ao acessar o servidor. Por favor tente mais tarde em alguns minutos.', function(){}, "Erro");
         					}
         				}
               });
             } else {
               $.mobile.loading( 'hide');
-              alert('Informe a vaga que deseja estacionar.');
+              navigator.notification.alert('Informe a vaga que deseja estacionar.', function(){}, "Atenção");
             } 
             
             /*  
@@ -146,16 +146,16 @@
                     success: function(data) {              
                       if (data.success) {
                         $.mobile.loading( 'hide'); 
-                        alert("Pagamento autorizado com sucesso.");  
+                        navigator.notification.alert("Pagamento autorizado com sucesso.", function(){}, "Confirmação");  
                       } else {
-                        alert(data.errors);
+                        navigator.notification.alert(data.errors, function(){}, "Erro");
                         $.mobile.loading( 'hide'); 
                       }
 
                     }, 
                     failure: function () {
                       $.mobile.loading( 'hide');
-                      alert("Falha ao efetuar pagamento. Tente novamente.");  
+                      navigator.notification.alert("Falha ao efetuar pagamento. Tente novamente.", function(){}, "Erro");  
                     }
                   }); 
                 } else {

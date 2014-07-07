@@ -80,7 +80,8 @@
 			||  $("#card-data-expiracao")	== ''
 			||  $("#card-name").val() 		== ''
 			||  $("#card-number").val() 	== '' ) {
-			alert("Todos os campos devem ser preenchidos");
+
+			navigator.notification.alert("Todos os campos devem ser preenchidos", function(){}, "Atenção!");
 		
 		} else {
 			
@@ -107,11 +108,13 @@
 				success: function(data){
 					//$('#modal').hide();
 					if(data.name == $("#nome").val()) {
-						alert("Cartão cadastrado com sucesso.");
+						navigator.notification.alert("Cartão cadastrado com sucesso.", function(){}, "Confirmação!");						
 						//close modal
 						$('#cadastro-cartao-checkin').dialog( "close" );
 
-					}                
+					}  else {
+						navigator.notification.alert("Erro ao cadastrar cartão.", function(){}, "Erro!");
+					}               
 				}
 			});
 		}

@@ -124,13 +124,13 @@
             },
             statusCode: {
                 0: function() {
-                    alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+                    navigator.notification.alert("Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.", function(){}, "Erro!");                    
                 },
                 406:function(){
-                    alert('Erro ao efetuar login. Tente novamente.');
+                    navigator.notification.alert("Erro ao efetuar login. Tente novamente.", function(){}, "Erro!");
                 }, 
                 500:function() {
-                    alert('Erro no servidor. Tente mais tarde.');
+                    navigator.notification.alert("Erro no servidor. Tente mais tarde.", function(){}, "Erro!");                    
                 }
             }
             

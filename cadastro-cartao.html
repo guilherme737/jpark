@@ -89,8 +89,7 @@
 			||  $("#card-data-expiracao")	== ''
 			||  $("#card-name").val() 		== ''
 			||  $("#card-number").val() 	== '' ) {
-			alert("Todos os campos devem ser preenchidos");
-		
+			navigator.notification.alert("Todos os campos devem ser preenchidos", function(){}, "Atenção!");
 		} else {
 			
 			//$('#modal').show();
@@ -122,13 +121,14 @@
 				//context: jQuery('#resultado'),
 				success: function(data){					
 					if(data.name == $("#nome").val()) {
-						alert("Cartão cadastrado com sucesso.");
+						navigator.notification.alert("Cartão cadastrado com sucesso.", function(){}, "Confirmação!");						
 						$('#comprar-credito').load('comprar-credito.html', function() {
 						  $.mobile.loading('hide');	
 			              $.mobile.navigate("#comprar-credito");
 			            });
 					} else {
 						$.mobile.loading('hide');
+						navigator.notification.alert("Erro ao cadastrar cartão.", function(){}, "Erro!");
 					} 
 				},
 				complete: function () {

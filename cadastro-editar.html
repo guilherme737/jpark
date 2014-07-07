@@ -135,7 +135,7 @@
 	     } else{
 	       //Se o campo estiver vazio, exibe uma mensagem ao usuário
 	       //AlertDialog('teste','informe o telefone',2800);
-		   alert('Informe o telefone');
+	       navigator.notification.alert("Informe o telefone.", function(){}, "Atenção!");		   
 	     }
    	});
 		  
@@ -152,12 +152,12 @@
 		if ($("#nome").val() 			== ''
 			||	$("#telefone").val()	== ''
 			||  $("#email").val() 		== '') {
-			alert("Os campos: Nome, Telefone e Email são obrigatórios");
+			navigator.notification.alert("Os campos: Nome, Telefone e Email são obrigatórios.", function(){}, "Atenção!");			
 		
 		} else if(items.length < 1) {
-			alert("Informe pelo menos 1 telefone na conta");
+			navigator.notification.alert("Informe pelo menos 1 telefone na conta.", function(){}, "Atenção!");			
 		} else if($("#senhaAtual").val() == '') {
-			alert("Informe a senha atual");
+			navigator.notification.alert("Informe a senha atual.", function(){}, "Atenção!");		
 		} else {		
 			if (
 				($("#senha").val() == '') || 
@@ -185,7 +185,8 @@
 					//context: jQuery('#resultado'),
 					success: function(data){
 						if (data == null || data == 'undefined') {	
-							alert('Cadastro realizado com sucesso');
+
+							navigator.notification.alert("Cadastro realizado com sucesso", function(){}, "Confirmação!");
 
 							if ( $("#senha").val() != '' ) {
 		                		$.ajax({
@@ -201,7 +202,7 @@
 								});
 		                	}						
 						} else {
-							alert('Erro ao efetuar o cadastro. Por favor confira os dados e tente novamente.');
+							navigator.notification.alert("Erro ao efetuar o cadastro. Por favor confira os dados e tente novamente.", function(){}, "Erro!");
 						}
 					},
 					failure: function () {
@@ -210,10 +211,10 @@
 		            statusCode: {
 		                0:function() {
 		                    //$('#modal').hide();
-		                    alert('Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.');
+		                    navigator.notification.alert("Erro na comunica&ccedil;&atilde;o. Verifique sua conex&atilde;o.", function(){}, "Erro!");              
 		                },          
 		                200:function() {
-		                	alert('Cadastro realizado com sucesso');
+		                	navigator.notification.alert("Cadastro realizado com sucesso", function(){}, "Confirmação!");
 		                	
 		                	if ( $("#senha").val() != '' ) {
 		                		$.ajax({
@@ -231,13 +232,13 @@
 		                },      
 		                500:function() {
 		                    //$('#modal').hide();
-		                    alert('Erro ao acessar o servidor. Por favor tente novamente em alguns minutos.');
+		                    navigator.notification.alert("Erro ao acessar o servidor. Por favor tente novamente em alguns minutos.", function(){}, "Erro!");
 		                }
 		            }
 				});
 
 			} else {
-				alert('Para alterar a senha o campo de confirmação de senha deve ser igual');
+				navigator.notification.alert("Para alterar a senha o campo de confirmação de senha deve ser igual.", function(){}, "Erro!");				
 				sinal = false;
 			}	
 		}					
